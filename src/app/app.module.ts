@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { VistaEjerciciosComponent } from './pages/vista-ejercicios/vista-ejercicios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainpageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    VistaEjerciciosComponent
   ],
   imports: [
     BrowserModule,

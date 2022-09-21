@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
+import { VistaEjerciciosComponent } from './pages/vista-ejercicios/vista-ejercicios.component';
 
 const routes: Routes = [
-  {path:'',component:MainpageComponent}
+  {path:'',component:MainpageComponent},
+  {path:'VistaEjercicios',component:VistaEjerciciosComponent}
 ];
 
 @NgModule({
