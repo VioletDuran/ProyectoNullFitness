@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {EjerciciosPublicos} from "../../services/ejercicios-publicos.type";
+import {EjerciciosPublicosService} from "../../services/ejercicios-publicos.service";
 
 @Component({
   selector: 'app-mainpage',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainpageComponent implements OnInit {
 
-  constructor() { }
+  ejerciciopublico: EjerciciosPublicos[] = [];
+
+  constructor(private ejerciciospublicos:EjerciciosPublicosService) { }
 
   ngOnInit(): void {
+    this.ejerciciopublico = this.ejerciciospublicos.ejerciciosPublicos;
   }
 
 }
