@@ -8,6 +8,7 @@ import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { VistaEjerciciosComponent } from './pages/vista-ejercicios/vista-ejercicios.component';
+import { VistaRutinasComponent } from './pages/vista-rutinas/vista-rutinas.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { VistaEjerciciosComponent } from './pages/vista-ejercicios/vista-ejercic
     MainpageComponent,
     HeaderComponent,
     FooterComponent,
-    VistaEjerciciosComponent
+    VistaEjerciciosComponent,
+    VistaRutinasComponent
   ],
   imports: [
     BrowserModule,
