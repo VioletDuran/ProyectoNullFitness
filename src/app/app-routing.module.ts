@@ -5,7 +5,7 @@ import { VistaEjerciciosComponent } from './pages/vista-ejercicios/vista-ejercic
 
 const routes: Routes = [
   {path:'',component:MainpageComponent},
-  {path:'VistaEjercicios',component:VistaEjerciciosComponent}
+  {path:'Ejercicios',component:VistaEjerciciosComponent}
 ];
 
 @NgModule({

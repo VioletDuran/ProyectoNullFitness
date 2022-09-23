@@ -11,7 +11,7 @@
 <div class="container">
   <div class="row my-4">
     <div class="row cards" style="width: auto; margin: auto auto;">
-      <div class="col-10 col-md-6 col-lg-4 mb-2" *ngFor="let ejercicio of ejerciciopublico">
+      <div class="col-10 col-md-6 col-lg-4 mb-2" *ngFor="let ejercicio of ejerciciopublico.slice(0,3)">
         <div class="card" style="width: 20rem;">
           <img src="{{ejercicio.foto}}" class="card-img-top" title="{{ejercicio.tituloFoto}}">
           <div class="card-body">

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {VistaEjercicios} from '../../services/VistaEjercicio/vista-ejercicios.type';
+import {VistaEjerciciosService} from '../../services/VistaEjercicio/vista-ejercicios.service';
 
 @Component({
   selector: 'app-vista-ejercicios',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vista-ejercicios.component.scss']
 })
 export class VistaEjerciciosComponent implements OnInit {
-
-  constructor() { }
-
+  arrayEjercicios:VistaEjercicios[] = []
+  constructor(private arrayEjerciciosAux:VistaEjerciciosService) { 
+  }
   ngOnInit(): void {
+    this.arrayEjercicios = this.arrayEjerciciosAux.arregloVistaEjercicio;
   }
 
 }

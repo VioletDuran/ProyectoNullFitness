@@ -14,7 +14,20 @@ export class MainpageComponent implements OnInit {
   constructor(private ejerciciospublicos:EjerciciosPublicosService) { }
 
   ngOnInit(): void {
-    this.ejerciciopublico = this.ejerciciospublicos.ejerciciosPublicos;
+    this.ejerciciopublico = this.randomNumber(this.ejerciciospublicos.ejerciciosPublicos);
+  }
+
+  randomNumber(arreglo:EjerciciosPublicos[]){
+    let currentIndex = arreglo.length,  randomIndex;
+
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [arreglo[currentIndex], arreglo[randomIndex]] = [
+        arreglo[randomIndex], arreglo[currentIndex]];
+    }
+  
+    return arreglo;
   }
 
 }
