@@ -9,6 +9,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { VistaEjerciciosComponent } from './pages/vista-ejercicios/vista-ejercicios.component';
 import { VistaRutinasComponent } from './pages/vista-rutinas/vista-rutinas.component';
+import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
+import { EjercicioComponent } from './pages/ejercicio/ejercicio.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { VistaRutinasComponent } from './pages/vista-rutinas/vista-rutinas.compo
     HeaderComponent,
     FooterComponent,
     VistaEjerciciosComponent,
-    VistaRutinasComponent
+    VistaRutinasComponent,
+    MiPerfilComponent,
+    EjercicioComponent
   ],
   imports: [
     BrowserModule,

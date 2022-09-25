@@ -14,5 +14,4 @@ export class VistaEjerciciosComponent implements OnInit {
   ngOnInit(): void {
     this.arrayEjercicios = this.arrayEjerciciosAux.arregloVistaEjercicio;
   }
-
 }

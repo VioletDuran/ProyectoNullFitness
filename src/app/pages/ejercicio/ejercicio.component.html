@@ -1,0 +1,34 @@
+<app-header></app-header>
+<div class = "container-fluid">
+    <div class = "row my-5">
+        <div class = "col text-center">
+            <h2 class = "fw-bolder">{{ejercicioEspecifico.tituloEjercicio}}</h2>
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "row">
+            <div class = "col">
+                <h4 class = "fw-folder">{{ejercicioEspecifico.descripcion}}</h4>
+            </div>
+        </div>
+        <div class = "row my-5">
+            <div class = "col text-center">
+                <img src="{{ejercicioEspecifico.foto}}" alt="Hip thrust" class = "tamaño-foto">
+            </div>
+        </div>
+        <div class = "row my-5">
+            <div class = "col">
+                <h4 class = "fw-bolder text-center">{{ejercicioEspecifico.tituloSegundo}}</h4>
+                <ul class = "my-3">
+                    <li class = "fw-folder tamaño-letra" *ngFor="let ejercicio of ejercicioEspecifico.descripcionMusculos">{{ejercicio}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class = "row my-5">
+            <div class = "col text-center">
+                <iframe class = "tamaño-foto" [src]="urlSafe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

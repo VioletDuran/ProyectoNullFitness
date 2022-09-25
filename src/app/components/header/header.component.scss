@@ -1,0 +1,16 @@
+.margenLogo{
+    margin-left: 35rem;
+}
+
+@media (max-width: 1600px) {
+    .margenLogo{
+        margin-left: 15rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .margenLogo{
+        margin-left: 10rem;
+    }
+}
+

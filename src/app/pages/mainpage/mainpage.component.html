@@ -18,7 +18,7 @@
             <h4 class="card-text">{{ejercicio.tituloEjercicio}}</h4>
             <p class="card-text">{{ejercicio.descripcion}}</p>
             <div class="col text-center">
-              <a type='buttom' href="#" class="btn-fblanco btn btn-custom rounded-pill text-uppercase">Dirigir</a>
+              <a type='buttom' [routerLink] = "['/Ejercicio',ejercicio.id]" class="btn-fblanco btn btn-custom rounded-pill text-uppercase">Dirigir</a>
             </div>
           </div>
         </div>

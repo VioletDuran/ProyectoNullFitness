@@ -1,7 +1,10 @@
 export interface EjerciciosPublicos {
-    id:number;
+    id:string;
     tituloEjercicio:string;
     tituloFoto:string;
     foto:string;
     descripcion:String;
+    tituloSegundo:String;
+    descripcionMusculos:String[];
+    video:string;
 }
