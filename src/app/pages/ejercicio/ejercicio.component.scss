@@ -23,6 +23,12 @@
         width: 20rem;
     }
 }
+@media (max-width: 320px) {
+    .tamaño-foto{
+        height: 13rem;
+        width: 15rem;
+    }
+}
 .tamaño-letra{
     font-size: 25px;
 }
