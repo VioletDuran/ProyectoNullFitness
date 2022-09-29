@@ -15,9 +15,12 @@ export class LoginRegistroComponent implements OnInit {
 
   ngOnInit(): void {
     let formulario = {
-      correo: ['', Validators.required],
+      correo: ['', Validators.compose([
+        Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
+        Validators.required
+      ])],
       password: ['', Validators.compose([
-        Validators.pattern(/^.{5,}$/),
+        Validators.pattern(/^.{8,}$/),
         Validators.required
       ])]
     }

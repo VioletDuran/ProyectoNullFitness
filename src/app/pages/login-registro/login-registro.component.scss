@@ -1,13 +1,23 @@
-body{
-  //background-image: url('~/src/assets/img/fondoLoginRegistro.jpg');
+body {
+  background-image: url('~/src/assets/img/fondoLoginRegistro_auto_x2.jpg');
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
 }
-formulario{
+
+.formulario {
   background-color: #FFFFFF;
   padding: 2%;
 }
 
-contedorFormulario{
+.contenedorFormulario {
   background-color: #FFFFFF;
-  opacity: 0.63;
+  height: 70%;
+  width: 60%;
+}
+
+.fuente {
+  font-size: larger;
 }

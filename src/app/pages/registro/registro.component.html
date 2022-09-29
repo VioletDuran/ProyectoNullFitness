@@ -1,0 +1,51 @@
+<body>
+<!--Primer Contenedor-->
+<div class="container">
+	<a [routerLink]="['']"><img class="img-responsive mt-3" src="../assets/img/nullEnRojo.png" height="50px"></a>
+	<div class=" border m-4 d-flex justify-content-center align-items-center" style="height: 600px">
+		<!--Primera Fila-->
+		<div class="row border d-flex justify-content-center align-items-center contenedorFormulario"
+		     style="height: 60%; width: 60%">
+			<!--Primera parte de la pagina de inicio de sesion -->
+			<a class="col text-center ">Registrarse</a>
+			<a class="col text-center ">Iniciar Sesion</a>
+			<!--Division de la columna-->
+			<div class="w-100"></div>
+			<!--Formulario de inicio de sesion-->
+			<div class="formulario">
+				<form class="row">
+					<div class="col-6">
+						<label for="campoNombreRealUsuario">Nombre</label>
+						<input type="username" class="form-control mb-3" id="campoNombreRealUsuario"
+						       aria-describedby="userRealNameHelp"
+						       placeholder="Ej: Sergio" formControlName="nombreRealUsuario">
+					</div>
+					<div class="col-6">
+						<label for="campoNombreUsuario">Nombre de usuario</label>
+						<input type="username" class="form-control mb-3" id="campoNombreUsuario"
+						       aria-describedby="userNameHelp"
+						       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario">
+					</div>
+					<div class="col-6">
+						<label for="campoEdad">Edad</label>
+						<input type="text" class="form-control mb-3" id="campoEdad"
+						       aria-describedby="ageHelp"
+						       placeholder="Ej: 20" formControlName="edad">
+					</div>
+					<div class="col-6">
+						<label for="campoCorreoElectronico">Correo</label>
+						<input type="email" class="form-control mb-3" id="campoCorreoElectronico"
+						       aria-describedby="emailHelp"
+						       placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
+					</div>
+					<div class="col">
+						<label for="campoContraseña">Contraseña</label>
+						<input type="password" class="form-control" id="campoContraseña" placeholder="**********"
+						       formControlName="password">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</body>

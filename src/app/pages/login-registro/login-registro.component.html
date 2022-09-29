@@ -1,33 +1,37 @@
 <body>
 <!--Primer Contenedor-->
 <div class="container">
-  <a [routerLink] = "['']"><img class="img-responsive mt-3" src="../assets/img/nullEnRojo.png" height="50px"></a>
-  <div class=" border m-4 d-flex justify-content-center align-items-center" style="height: 600px">
-    <!--Primera Fila-->
-    <div class="row border d-flex justify-content-center align-items-center contenedorFormulario"
-         style="height: 60%; width: 60%">
-      <!--Primera parte de la pagina de inicio de sesion -->
-      <div class="col text-center ">Registrarse</div>
-      <div class="col text-center ">Iniciar Sesion</div>
-      <!--Division de la columna-->
-      <div class="w-100"></div>
-      <!--Formulario de inicio de sesion-->
-      <div class="col formulario">
-        <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
-          <label for="campoCorreoElectronico">Correo electronico</label>
-          <input type="email" class="form-control mb-3" id="campoCorreoElectronico" aria-describedby="emailHelp"
-                 placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
-          <label for="campoContraseña">Contraseña</label>
-          <input type="password" class="form-control" id="campoContraseña" placeholder="**********"
-                 formControlName="password">
-          <button type="submit" class="btn btn-danger mt-5">Iniciar Sesion</button>
-        </form>
-      </div>
-      <!--Boton de inicio de sesion-->
+	<a [routerLink]="['']"><img class="img-responsive mt-3" src="../assets/img/nullEnRojo.png" height="50px"></a>
+	<div class=" border m-4 d-flex justify-content-center align-items-center" style="height: 600px">
+		<!--Primera Fila-->
+		<div class="row border d-flex justify-content-center align-items-center contenedorFormulario">
+			<!--Primera parte de la pagina de inicio de sesion -->
+			<div class="col text-center fuente">Registrarse</div>
+			<div class="col text-center fuente">Iniciar Sesion</div>
+			<!--Division de la columna-->
+			<div class="w-100"></div>
+			<!--Formulario de inicio de sesion-->
+			<div class="container-fluid formulario">
+				<div class="row">
+					<div class="col">
+						<form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
+							<label for="campoCorreoElectronico">Correo electronico</label>
+							<input type="email" class="form-control mb-3" id="campoCorreoElectronico"
+							       aria-describedby="emailHelp" placeholder="Ej: Sergio.a@correo.cl"
+							       formControlName="correo">
+							<label for="campoContraseña">Contraseña</label>
+							<input type="password" class="form-control" id="campoContraseña" placeholder="**********"
+							       formControlName="password">
+							<button type="submit" class="btn btn-danger mt-5 ">Iniciar Sesion</button>
+						</form>
+					</div>
+				</div>
 
-    </div>
-    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
-  </div>
+			</div>
+			<!--Boton de inicio de sesion-->
+
+		</div>
+		<!--<button type="submit" class="btn btn-primary">Submit</button>-->
+	</div>
 </div>
 </body>
-

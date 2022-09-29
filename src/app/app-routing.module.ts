@@ -6,6 +6,7 @@ import { VistaRutinasComponent } from './pages/vista-rutinas/vista-rutinas.compo
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { EjercicioComponent } from './pages/ejercicio/ejercicio.component';
 import { LoginRegistroComponent } from './pages/login-registro/login-registro.component';
+import { RegistroComponent } from './pages/registro/registro.component';
 
 const routes: Routes = [
   {path:'',component:MainpageComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'Rutinas',component:VistaRutinasComponent},
   {path:'MiPerfil',component:MiPerfilComponent},
   {path:'Ejercicio/:id',component:EjercicioComponent},
-  {path: 'LoginRegistroComponent',component:LoginRegistroComponent}
+  {path:'Login',component:LoginRegistroComponent},
+  {path:'Registro', component:RegistroComponent}
 ];
 
 @NgModule({
