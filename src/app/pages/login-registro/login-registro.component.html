@@ -1,39 +1,40 @@
 <body>
-  <div class="container full d-flex justify-content-center align-items-center">
-    <div class = "row justify-content-center">
-      <div class = "col">
-        <div class = "card">
-          <div class = "card-top text-center mt-5">
-            <a [routerLink]="['']"><img src="../assets/img/nullEnRojo.png" height="55rem;"></a>
-          </div>
-          <div class = "card-body p-5">
-            <div class = "row d-flex justify-content-center align-items-center">
-              <div class = "col">
-                <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
-                  <label for="campoCorreoElectronico">Correo electronico</label>
-                  <input type="email" class="form-input" id="campoCorreoElectronico" aria-describedby="emailHelp"
-                    placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
-                  <label for="campoContraseña">Contraseña</label>
-                  <input type="password" class="form-input" id="campoContraseña" placeholder="**********"
-                    formControlName="password">
-                    <div class = "text-center">
-                      <button type="submit" class="btn btn-danger mt-2">Iniciar Sesion</button>
-                    </div>
-              </form>
-              </div>
-            </div>
-            <hr class="my-3 d-inline-block mx-auto"
-            style="width: 100%; background-color: #6D0000; height: 2px"/>
-            <div class = "row">
-              <div class = "col">
-                <div class = "text-center">
-                  <button type="submit" class="btn btn-danger">Registrarse</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container full d-flex justify-content-center align-items-center">
+	<div class="row justify-content-center">
+		<div class="col">
+			<div class="card">
+				<div class="card-top text-center mt-5">
+					<a [routerLink]="['']"><img src="../assets/img/nullEnRojo.png" height="55rem;"></a>
+				</div>
+				<div class="card-body p-5">
+					<div class="row d-flex justify-content-center align-items-center">
+						<div class="col">
+							<form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
+								<label for="campoCorreoElectronico">Correo electronico</label>
+								<input type="email" class="form-input" id="campoCorreoElectronico"
+								       aria-describedby="emailHelp"
+								       placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
+								<label for="campoContraseña">Contraseña</label>
+								<input type="password" class="form-input" id="campoContraseña" placeholder="**********"
+								       formControlName="password">
+								<div class="text-center">
+									<button type="submit" class="btn btn-danger mt-2">Iniciar Sesion</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<hr class="my-3 d-inline-block mx-auto" style="width: 100%; background-color: #6D0000; height: 2px"/>
+					<div class="row">
+						<div class="col">
+							<div class="text-center">
+								<h5 class="mb-4">¿No estas registrado?</h5>
+								<a type="button" class="btn btn-danger" [routerLink] = "['/Registro']" >Registrarse</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>

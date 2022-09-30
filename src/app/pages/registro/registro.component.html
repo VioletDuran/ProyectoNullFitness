@@ -1,51 +1,64 @@
 <body>
-<!--Primer Contenedor-->
-<div class="container">
-	<a [routerLink]="['']"><img class="img-responsive mt-3" src="../assets/img/nullEnRojo.png" height="50px"></a>
-	<div class=" border m-4 d-flex justify-content-center align-items-center" style="height: 600px">
-		<!--Primera Fila-->
-		<div class="row border d-flex justify-content-center align-items-center contenedorFormulario"
-		     style="height: 60%; width: 60%">
-			<!--Primera parte de la pagina de inicio de sesion -->
-			<a class="col text-center ">Registrarse</a>
-			<a class="col text-center ">Iniciar Sesion</a>
-			<!--Division de la columna-->
-			<div class="w-100"></div>
-			<!--Formulario de inicio de sesion-->
-			<div class="formulario">
-				<form class="row">
-					<div class="col-6">
-						<label for="campoNombreRealUsuario">Nombre</label>
-						<input type="username" class="form-control mb-3" id="campoNombreRealUsuario"
-						       aria-describedby="userRealNameHelp"
-						       placeholder="Ej: Sergio" formControlName="nombreRealUsuario">
+<div class="container full d-flex justify-content-center align-items-center">
+	<div class="row justify-content-center">
+		<div class="col">
+			<div class="card">
+				<div class="card-top text-center mt-5">
+					<a [routerLink]="['']"><img src="../assets/img/nullEnRojo.png" height="55rem;"></a>
+				</div>
+				<div class="card-body p-5">
+					<div class="row d-flex justify-content-center align-items-center">
+						<div class="col">
+							<form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()">
+								<label for="campoNombreRealUsuario">Nombre</label>
+								<input type="username" class="form-input" id="campoNombreRealUsuario"
+								       aria-describedby="userRealNameHelp"
+								       placeholder="Ej: Sergio" formControlName="nombreRealUsuario">
+
+
+								<label for="campoNombreUsuario">Nombre de usuario</label>
+								<input type="username" class="form-input" id="campoNombreUsuario"
+								       aria-describedby="userNameHelp"
+								       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario">
+
+
+								<label for="campoEdad">Edad</label>
+								<input type="text" class="form-input" id="campoEdad"
+								       aria-describedby="ageHelp"
+								       placeholder="Ej: 20" formControlName="edad">
+
+
+								<label for="campoCorreoElectronico">Correo</label>
+								<input type="email" class="form-input" id="campoCorreoElectronico"
+								       aria-describedby="emailHelp"
+								       placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
+
+
+								<label for="campoContraseña">Contraseña</label>
+								<input type="password" class="form-input" id="campoContraseña" placeholder="**********"
+								       formControlName="password">
+								<div class="text-center">
+									<button type="submit" class="btn btn-danger mt-2">Registrarse</button>
+								</div>
+							</form>
+
+						</div>
 					</div>
-					<div class="col-6">
-						<label for="campoNombreUsuario">Nombre de usuario</label>
-						<input type="username" class="form-control mb-3" id="campoNombreUsuario"
-						       aria-describedby="userNameHelp"
-						       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario">
+					<hr class="my-3 d-inline-block mx-auto" style="width: 100%; background-color: #6D0000; height: 2px"/>
+					<div class="row">
+						<div class="col">
+							<div class="text-center">
+								<h5 class="mb-4">¿Ya tienes cuenta?</h5>
+								<a type="button" class="btn btn-danger" [routerLink] = "['/Login']">Iniciar sesion</a>
+							</div>
+						</div>
 					</div>
-					<div class="col-6">
-						<label for="campoEdad">Edad</label>
-						<input type="text" class="form-control mb-3" id="campoEdad"
-						       aria-describedby="ageHelp"
-						       placeholder="Ej: 20" formControlName="edad">
-					</div>
-					<div class="col-6">
-						<label for="campoCorreoElectronico">Correo</label>
-						<input type="email" class="form-control mb-3" id="campoCorreoElectronico"
-						       aria-describedby="emailHelp"
-						       placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
-					</div>
-					<div class="col">
-						<label for="campoContraseña">Contraseña</label>
-						<input type="password" class="form-control" id="campoContraseña" placeholder="**********"
-						       formControlName="password">
-					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 </body>
+
+
+
