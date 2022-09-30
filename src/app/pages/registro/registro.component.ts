@@ -14,7 +14,7 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit(): void {
     let formulario = {
-      nombreReal: ['', Validators.compose([
+      nombreRealUsuario: ['', Validators.compose([
         Validators.pattern(/^.{8,}$/),
           Validators.required
       ])],

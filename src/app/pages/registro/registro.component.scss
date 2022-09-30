@@ -1,12 +1,11 @@
-body {
+.fotoBack{
   background-image: url('~/src/assets/img/fondoLoginRegistro_auto_x2.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
 }
-
 .full{
   height: 100vh;
 }
