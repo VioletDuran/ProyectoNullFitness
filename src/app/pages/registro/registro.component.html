@@ -1,74 +1,79 @@
-<div class = "fotoBack">
-<div class="container full d-flex justify-content-center align-items-center">
-	<div class="row justify-content-center">
-		<div class="col">
-			<div class="card">
-				<div class="card-top text-center mt-5">
-					<a [routerLink]="['']"><img src="../assets/img/nullEnRojo.png" height="55rem;"></a>
-				</div>
-				<div class="card-body p-5">
-					<div class="row d-flex justify-content-center align-items-center">
-						<div class="col">
-							<form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()" >
-
-								<label for="campoNombreRealUsuario">Nombre</label>
-								<input type="username" class="form-input" id="campoNombreRealUsuario"
-								       aria-describedby="userRealNameHelp"
-								       placeholder="Ej: Sergio" formControlName="nombreRealUsuario">
-								<div *ngIf="formularioRegistro.get('nombreRealUsuario')?.touched && formularioRegistro.get('nombreRealUsuario')?.errors?.['required']"
-								     class="alert alert-danger">Este campo es obligatorio
-								</div>
-
-								<label for="campoNombreUsuario">Nombre de usuario</label>
-								<input type="username" class="form-input" id="campoNombreUsuario"
-								       aria-describedby="userNameHelp"
-								       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario" >
-								<div *ngIf="formularioRegistro.get('nombreUsuario')?.touched && formularioRegistro.get('nombreUsuario')?.errors?.['required']"
-								     class="alert alert-danger">Este campo es obligatorio
-								</div>
-
-								<label for="campoEdad">Edad</label>
-								<input type="text" class="form-input" id="campoEdad"
-								       aria-describedby="ageHelp"
-								       placeholder="Ej: 20" formControlName="edad" >
-								<div *ngIf="formularioRegistro.get('edad')?.touched && formularioRegistro.get('edad')?.errors?.['pattern']"
-								     class="alert alert-danger">Ingrese una edad valida, entre 0 y 200
-								</div>
-
-								<label for="campoCorreoElectronico">Correo</label>
-									<input type="email" class="form-input" id="campoCorreoElectronico"
-									aria-describedby="emailHelp"
-									placeholder="Ej: Sergio.a@correo.cl" formControlName="correo" >
-								<div *ngIf="formularioRegistro.get('correo')?.touched && formularioRegistro.get('correo')?.errors?.['required']"
-								     class="alert alert-danger">Este campo es obligatorio
-								</div>
-								<div *ngIf="formularioRegistro.get('correo')?.touched && formularioRegistro.get('correo')?.errors?.['pattern']"
-								     class="alert alert-danger">Este campo debe tener formato de correo
-								</div>
-
-								<label for="campoContraseña">Contraseña</label>
-								<input type="password" class="form-input" id="campoContraseña" placeholder="**********"
-								       formControlName="password" >
-								<div *ngIf="formularioRegistro.get('password')?.touched && formularioRegistro.get('password')?.errors?.['required']"
-								     class="alert alert-danger">Este campo es obligatorio
-								</div>
-								<div *ngIf="formularioRegistro.get('password')?.touched && formularioRegistro.get('password')?.errors?.['pattern']"
-								     class="alert alert-danger">La contraseña debe como minimo una letra, un numero y 6 caracteres
-								</div>
-
-								<div class="text-center">
-									<button type="submit" class="btn btn-danger mt-2">Registrarse</button>
-								</div>
-							</form>
-
-						</div>
+<div class="fotoBack">
+	<div class="container full d-flex justify-content-center align-items-center">
+		<div class="row justify-content-center">
+			<div class="col">
+				<div class="card">
+					<div class="card-top text-center mt-5">
+						<a [routerLink]="['']"><img src="../assets/img/nullEnRojo.png" height="55rem;"></a>
 					</div>
-					<hr class="my-3 d-inline-block mx-auto" style="width: 100%; background-color: #6D0000; height: 2px"/>
-					<div class="row">
-						<div class="col">
-							<div class="text-center">
-								<h5 class="mb-2">¿Ya tienes cuenta?</h5>
-								<a type="button" class="btn btn-danger" [routerLink] = "['/Login']">Iniciar sesion</a>
+					<div class="card-body p-5">
+						<div class="row d-flex justify-content-center align-items-center">
+							<div class="col">
+								<form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()">
+
+									<label for="campoNombreRealUsuario">Nombre</label>
+									<input type="username" class="form-input" id="campoNombreRealUsuario"
+									       aria-describedby="userRealNameHelp"
+									       placeholder="Ej: Sergio" formControlName="nombreRealUsuario">
+
+									<div *ngIf="formularioRegistro.get('nombreRealUsuario')?.touched && formularioRegistro.get('nombreRealUsuario')?.errors?.['required']"
+									     class="errorCualquiera">Este campo es obligatorio
+									</div>
+
+									<label for="campoNombreUsuario">Nombre de usuario</label>
+									<input type="username" class="form-input" id="campoNombreUsuario"
+									       aria-describedby="userNameHelp"
+									       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario">
+									<div *ngIf="formularioRegistro.get('nombreUsuario')?.touched && formularioRegistro.get('nombreUsuario')?.errors?.['required']"
+									     class="errorCualquiera">Este campo es obligatorio
+									</div>
+
+									<label for="campoEdad">Edad</label>
+									<input type="text" class="form-input" id="campoEdad"
+									       aria-describedby="ageHelp"
+									       placeholder="Ej: 20" formControlName="edad">
+									<div *ngIf="formularioRegistro.get('edad')?.touched && formularioRegistro.get('edad')?.errors?.['pattern']"
+									     class="errorCualquiera">Ingrese una edad valida, entre 0 y 200
+									</div>
+
+									<label for="campoCorreoElectronico">Correo</label>
+									<input type="email" class="form-input" id="campoCorreoElectronico"
+									       aria-describedby="emailHelp"
+									       placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
+									<div *ngIf="formularioRegistro.get('correo')?.touched && formularioRegistro.get('correo')?.errors?.['required']"
+									     class="errorCualquiera">Este campo es obligatorio
+									</div>
+									<div *ngIf="formularioRegistro.get('correo')?.touched && formularioRegistro.get('correo')?.errors?.['pattern']"
+									     class="errorCualquiera ">Este campo debe tener formato de correo
+									</div>
+
+									<label for="campoContraseña">Contraseña</label>
+									<input type="password" class="form-input" id="campoContraseña"
+									       placeholder="**********"
+									       formControlName="password">
+									<div *ngIf="formularioRegistro.get('password')?.touched && formularioRegistro.get('password')?.errors?.['required']"
+									     class="errorCualquiera">Este campo es obligatorio
+									</div>
+									<div *ngIf="formularioRegistro.get('password')?.touched && formularioRegistro.get('password')?.errors?.['pattern']"
+									     class="errorCualquiera">La contraseña debe como minimo una letra, un numero
+									                                y 6 caracteres
+									</div>
+
+									<div class="text-center">
+										<button type="submit" class="btn btn-danger mt-2">Registrarse</button>
+									</div>
+								</form>
+
+							</div>
+						</div>
+						<hr class="my-3 d-inline-block mx-auto"
+						    style="width: 100%; background-color: #6D0000; height: 2px"/>
+						<div class="row">
+							<div class="col">
+								<div class="text-center">
+									<h5 class="mb-2">¿Ya tienes cuenta?</h5>
+									<a type="button" class="btn btn-danger" [routerLink]="['/Login']">Iniciar sesion</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -76,7 +81,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 

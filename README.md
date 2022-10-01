@@ -1,3 +1,8 @@
+Para usar el comando ng serve tiene que instalar paquetes con npm install (tenemos problemas para instalar los paquetes como dependencias del proyecto)
+
+No se utilizo jquery para la validacion de formularios, sino ReactiveForms de angular. Ademas se trabajo directamente con el framework de angular. Tambien se añadio las vistas que faltaban.
+
+
 # Null
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.

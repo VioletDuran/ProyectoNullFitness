@@ -15,10 +15,10 @@
 									       aria-describedby="emailHelp"
 									       placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
 									<div *ngIf="formularioLogin.get('correo')?.touched && formularioLogin.get('correo')?.errors?.['required']"
-									     class="alert alert-danger">Este campo es obligatorio
+									     class="errorCualquiera">Este campo es obligatorio
 									</div>
 									<div *ngIf="formularioLogin.get('correo')?.touched && formularioLogin.get('correo')?.errors?.['pattern']"
-									     class="alert alert-danger">Este campo debe tener formato de correo
+									     class="errorCualquiera ">Este campo debe tener formato de correo
 									</div>
 									<label for="campoContraseña">Contraseña</label>
 									<input type="password" class="form-input" id="campoContraseña"
