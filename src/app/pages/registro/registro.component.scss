@@ -21,19 +21,6 @@
   display:block;
 }
 
-@media (max-width: 1025px) {
-  .form-input{
-    width: 400px;
-    height: 30px;
-    padding-left: 15px;
-    margin-bottom: 5px;
-    border: 1px solid #00000020;
-    border-radius: 50px;
-    outline: none;
-    display:block;
-  } 
-}
-
 @media (max-width: 576px) {
   .form-input{
     width: 180px;
@@ -46,12 +33,12 @@
     display:block;
   } 
 }
-
 .errorCualquiera{
   margin-top: -18px;
   margin-bottom: 15px;
   font-size: 2vh;
   color: red;
+  width: 400px;
 }
 
 @media (max-width: 624px) {
@@ -59,6 +46,7 @@
     margin-top: -5px;
     color: red;
     font-size: 1.5vh;
+    width: 180px;
   }
 }
 
