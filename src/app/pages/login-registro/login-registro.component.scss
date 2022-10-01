@@ -48,30 +48,20 @@
 }
 
 .errorCualquiera{
-  margin-top: -18px;
-  margin-bottom: 15px;
+  margin-top: -10px;
   font-size: 2vh;
   color: red;
-  width: 400px;
+  width: 300px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 624px) {
   .errorCualquiera{
+    margin-top: -5px;
     color: red;
     font-size: 1.5vh;
     width: 180px;
   }
 }
-
-@media (max-width: 576px) {
-  .errorCualquiera{
-    margin-top: 5px;
-    color: red;
-    font-size: 1.5vh;
-    width: 180px;
-  }
-}
-
 
 input.ng-invalid.ng-touched{
   border: solid 1px red;
