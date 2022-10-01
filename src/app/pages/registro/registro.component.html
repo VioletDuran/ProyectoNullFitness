@@ -9,32 +9,53 @@
 				<div class="card-body p-5">
 					<div class="row d-flex justify-content-center align-items-center">
 						<div class="col">
-							<form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()" errorTailor>
+							<form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()" >
+
 								<label for="campoNombreRealUsuario">Nombre</label>
 								<input type="username" class="form-input" id="campoNombreRealUsuario"
 								       aria-describedby="userRealNameHelp"
-								       placeholder="Ej: Sergio" formControlName="nombreRealUsuario" [controlErrorsTpl] = "nombreError">
-
+								       placeholder="Ej: Sergio" formControlName="nombreRealUsuario">
+								<div *ngIf="formularioRegistro.get('nombreRealUsuario')?.touched && formularioRegistro.get('nombreRealUsuario')?.errors?.['required']"
+								     class="alert alert-danger">Este campo es obligatorio
+								</div>
 
 								<label for="campoNombreUsuario">Nombre de usuario</label>
 								<input type="username" class="form-input" id="campoNombreUsuario"
 								       aria-describedby="userNameHelp"
-								       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario" [controlErrorsTpl] = "nombreError">
-
+								       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario" >
+								<div *ngIf="formularioRegistro.get('nombreUsuario')?.touched && formularioRegistro.get('nombreUsuario')?.errors?.['required']"
+								     class="alert alert-danger">Este campo es obligatorio
+								</div>
 
 								<label for="campoEdad">Edad</label>
 								<input type="text" class="form-input" id="campoEdad"
 								       aria-describedby="ageHelp"
-								       placeholder="Ej: 20" formControlName="edad" [controlErrorsTpl] = "nombreError">
-
+								       placeholder="Ej: 20" formControlName="edad" >
+								<div *ngIf="formularioRegistro.get('edad')?.touched && formularioRegistro.get('edad')?.errors?.['pattern']"
+								     class="alert alert-danger">Ingrese una edad valida, entre 0 y 200
+								</div>
 
 								<label for="campoCorreoElectronico">Correo</label>
 									<input type="email" class="form-input" id="campoCorreoElectronico"
 									aria-describedby="emailHelp"
-									placeholder="Ej: Sergio.a@correo.cl" formControlName="correo" [controlErrorsTpl] = "nombreError">									
+									placeholder="Ej: Sergio.a@correo.cl" formControlName="correo" >
+								<div *ngIf="formularioRegistro.get('correo')?.touched && formularioRegistro.get('correo')?.errors?.['required']"
+								     class="alert alert-danger">Este campo es obligatorio
+								</div>
+								<div *ngIf="formularioRegistro.get('correo')?.touched && formularioRegistro.get('correo')?.errors?.['pattern']"
+								     class="alert alert-danger">Este campo debe tener formato de correo
+								</div>
+
 								<label for="campoContraseña">Contraseña</label>
 								<input type="password" class="form-input" id="campoContraseña" placeholder="**********"
-								       formControlName="password" [controlErrorsTpl] = "nombreError">
+								       formControlName="password" >
+								<div *ngIf="formularioRegistro.get('password')?.touched && formularioRegistro.get('password')?.errors?.['required']"
+								     class="alert alert-danger">Este campo es obligatorio
+								</div>
+								<div *ngIf="formularioRegistro.get('password')?.touched && formularioRegistro.get('password')?.errors?.['pattern']"
+								     class="alert alert-danger">La contraseña debe como minimo una letra, un numero y 6 caracteres
+								</div>
+
 								<div class="text-center">
 									<button type="submit" class="btn btn-danger mt-2">Registrarse</button>
 								</div>
@@ -59,8 +80,3 @@
 </div>
 
 
-<ng-template  let-error  let-text =" texto " #nombreError >
-	<div *ngIf="error?.required" class = "errorCualquiera">
-		<p>Este campo es requerido</p>
-	</div>
-</ng-template>

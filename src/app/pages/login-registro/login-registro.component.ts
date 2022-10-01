@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./login-registro.component.scss']
 })
 export class LoginRegistroComponent implements OnInit {
-  formularioLogin: FormGroup = {} as FormGroup;
+  formularioLogin!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
   }
@@ -20,7 +20,7 @@ export class LoginRegistroComponent implements OnInit {
         Validators.required
       ])],
       password: ['', Validators.compose([
-        Validators.pattern(/^.{6,}$/),
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/),
         Validators.required
       ])]
     }

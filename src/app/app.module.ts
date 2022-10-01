@@ -34,7 +34,7 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    ErrorTailorModule.forRoot({
+    /*ErrorTailorModule.forRoot({
       errors: {
         useValue: {
           required: 'Este campo es requerido',
@@ -43,7 +43,7 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
           invalidAddress: error => `Address isn't valid`
         }
       }
-    })
+    })*/
   ],
   providers: [],
   bootstrap: [AppComponent]

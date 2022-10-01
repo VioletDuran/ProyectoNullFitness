@@ -8,30 +8,27 @@ import {Router} from "@angular/router";
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent implements OnInit {
-    formularioRegistro: FormGroup = {} as FormGroup;
+    formularioRegistro!: FormGroup;
   constructor(private formBuilder: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
     let formulario = {
       nombreRealUsuario: ['', Validators.compose([
-        Validators.pattern(/^.{3,}$/),
           Validators.required
       ])],
       nombreUsuario: ['', Validators.compose([
-          Validators.pattern(/^.{4,}$/),
           Validators.required
       ])],
       edad: ['', Validators.compose([
-          Validators.pattern(/^.{2,}$/),
-          Validators.required
+          Validators.pattern(/^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/),
       ])],
       correo: ['', Validators.compose([
           Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
           Validators.required
       ])],
       password: ['', Validators.compose([
-          Validators.pattern(/^.{6,}$/),
+          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/),
           Validators.required
       ])]
     }
