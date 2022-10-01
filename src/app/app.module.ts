@@ -14,6 +14,7 @@ import { EjercicioComponent } from './pages/ejercicio/ejercicio.component';
 import { LoginRegistroComponent } from './pages/login-registro/login-registro.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { RegistroComponent } from './pages/registro/registro.component';
+import { ErrorTailorModule } from '@ngneat/error-tailor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,17 @@ import { RegistroComponent } from './pages/registro/registro.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ErrorTailorModule.forRoot({
+      errors: {
+        useValue: {
+          required: 'Este campo es requerido',
+          minlength: ({ requiredLength, actualLength }) => 
+                      `Expect ${requiredLength} but got ${actualLength}`,
+          invalidAddress: error => `Address isn't valid`
+        }
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,23 +15,23 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     let formulario = {
       nombreRealUsuario: ['', Validators.compose([
-        Validators.pattern(/^.{8,}$/),
+        Validators.pattern(/^.{3,}$/),
           Validators.required
       ])],
       nombreUsuario: ['', Validators.compose([
-          Validators.pattern(/^.{8,}$/),
+          Validators.pattern(/^.{4,}$/),
           Validators.required
       ])],
       edad: ['', Validators.compose([
-          Validators.pattern(/^.{8,}$/),
+          Validators.pattern(/^.{2,}$/),
           Validators.required
       ])],
       correo: ['', Validators.compose([
-          Validators.pattern(/^.{8,}$/),
+          Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
           Validators.required
       ])],
       password: ['', Validators.compose([
-          Validators.pattern(/^.{8,}$/),
+          Validators.pattern(/^.{6,}$/),
           Validators.required
       ])]
     }

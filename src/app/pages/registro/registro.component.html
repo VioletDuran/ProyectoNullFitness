@@ -9,34 +9,32 @@
 				<div class="card-body p-5">
 					<div class="row d-flex justify-content-center align-items-center">
 						<div class="col">
-							<form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()">
+							<form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()" errorTailor>
 								<label for="campoNombreRealUsuario">Nombre</label>
 								<input type="username" class="form-input" id="campoNombreRealUsuario"
 								       aria-describedby="userRealNameHelp"
-								       placeholder="Ej: Sergio" formControlName="nombreRealUsuario">
+								       placeholder="Ej: Sergio" formControlName="nombreRealUsuario" [controlErrorsTpl] = "nombreError">
 
 
 								<label for="campoNombreUsuario">Nombre de usuario</label>
 								<input type="username" class="form-input" id="campoNombreUsuario"
 								       aria-describedby="userNameHelp"
-								       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario">
+								       placeholder="Ej: SergiOwO3232" formControlName="nombreUsuario" [controlErrorsTpl] = "nombreError">
 
 
 								<label for="campoEdad">Edad</label>
 								<input type="text" class="form-input" id="campoEdad"
 								       aria-describedby="ageHelp"
-								       placeholder="Ej: 20" formControlName="edad">
+								       placeholder="Ej: 20" formControlName="edad" [controlErrorsTpl] = "nombreError">
 
 
 								<label for="campoCorreoElectronico">Correo</label>
-								<input type="email" class="form-input" id="campoCorreoElectronico"
-								       aria-describedby="emailHelp"
-								       placeholder="Ej: Sergio.a@correo.cl" formControlName="correo">
-
-
+									<input type="email" class="form-input" id="campoCorreoElectronico"
+									aria-describedby="emailHelp"
+									placeholder="Ej: Sergio.a@correo.cl" formControlName="correo" [controlErrorsTpl] = "nombreError">									
 								<label for="campoContraseña">Contraseña</label>
 								<input type="password" class="form-input" id="campoContraseña" placeholder="**********"
-								       formControlName="password">
+								       formControlName="password" [controlErrorsTpl] = "nombreError">
 								<div class="text-center">
 									<button type="submit" class="btn btn-danger mt-2">Registrarse</button>
 								</div>
@@ -61,4 +59,8 @@
 </div>
 
 
-
+<ng-template  let-error  let-text =" texto " #nombreError >
+	<div *ngIf="error?.required" class = "errorCualquiera">
+		<p>Este campo es requerido</p>
+	</div>
+</ng-template>

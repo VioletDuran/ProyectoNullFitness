@@ -36,7 +36,7 @@
 
 @media (max-width: 576px) {
   .form-input{
-    width: 200px;
+    width: 180px;
     height: 20px;
     padding-left: 15px;
     margin-bottom: 5px;
@@ -47,3 +47,25 @@
   } 
 }
 
+.errorCualquiera{
+  margin-top: -15px;
+  margin-bottom: 20px;
+  font-size: 1.5vh;
+  color: red;
+}
+
+@media (max-width: 1025px) {
+  .errorCualquiera{
+    margin-top: -5px;
+    color: red;
+    font-size: 1.5vh;
+  }
+}
+
+input.ng-invalid.ng-touched{
+  border: solid 1px red;
+}
+
+input.ng-valid.ng-touched{
+  border: solid 1px green;
+}

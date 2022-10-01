@@ -20,7 +20,7 @@ export class LoginRegistroComponent implements OnInit {
         Validators.required
       ])],
       password: ['', Validators.compose([
-        Validators.pattern(/^.{8,}$/),
+        Validators.pattern(/^.{6,}$/),
         Validators.required
       ])]
     }
