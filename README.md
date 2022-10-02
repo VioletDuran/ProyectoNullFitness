@@ -1,3 +1,8 @@
+# Integrantes
+Sergio Arriagada Gallo
+Diego Duran Muñoz
+Nicolas Salamanca Arce
+
 # NullProyect
 Para usar el comando ng serve y probar la página, tiene que instalar paquetes con npm install (tenemos problemas para instalar los paquetes como dependencias del proyecto)
 
