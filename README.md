@@ -1,32 +1,6 @@
-Para usar el comando ng serve tiene que instalar paquetes con npm install (tenemos problemas para instalar los paquetes como dependencias del proyecto)
+# NullProyect
+Para usar el comando ng serve y probar la página, tiene que instalar paquetes con npm install (tenemos problemas para instalar los paquetes como dependencias del proyecto)
 
-No se utilizo jquery para la validacion de formularios, sino ReactiveForms de angular. Ademas se trabajo directamente con el framework de angular. Tambien se añadio las vistas que faltaban.
+Se trabajó directamente con el framework de Angular. No se utilizó jquery para la validación de formularios, sino ReactiveForms, quedando dentro de la página el formulario de registro y de inicio de sesión del usuario. También se añadió las vistas que faltaban: Rutinas, ejercicios, mi perfil, ejercicio específico y rutina especifica. Todas las vistas fueron trabajadas con Boostrap de Angular, y los respectivos scss de los componentes.
 
-
-# Null
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Además todo contenido puesto en las vistas solo son a modo de ejemplo, no significan que será la información final. Se pusieron 6 ejercicios "hardcodeados" para probar la página.
