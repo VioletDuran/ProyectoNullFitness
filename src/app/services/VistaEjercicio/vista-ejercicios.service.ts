@@ -11,7 +11,10 @@ export class VistaEjerciciosService {
   }
   generarNumeros(){
     for (let i = 0; i < 12; i++) {
-      this.arregloVistaEjercicio[i] = {tituloEjercicio:"Ejercicio " + (i+1)};
+      this.arregloVistaEjercicio[i] = {tituloEjercicio:"Ejercicio " + (i+1),
+      foto:"../../../assets/img/abdominal.png",
+      id:"1"
+      };
     }
   }
 }

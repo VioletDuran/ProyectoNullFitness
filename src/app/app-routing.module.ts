@@ -10,7 +10,7 @@ import { RegistroComponent } from './pages/registro/registro.component';
 
 const routes: Routes = [
   {path:'',component:MainpageComponent},
-  {path:'Ejercicios',component:VistaEjerciciosComponent},
+  {path:'Ejercicios/:id',component:VistaEjerciciosComponent},
   {path:'Rutinas',component:VistaRutinasComponent},
   {path:'MiPerfil',component:MiPerfilComponent},
   {path:'Ejercicio/:id',component:EjercicioComponent},
@@ -19,7 +19,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+  RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled',
+  onSameUrlNavigation: 'reload'
+  }),],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
