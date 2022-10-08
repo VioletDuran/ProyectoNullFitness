@@ -1,0 +1,20 @@
+[
+    {
+        "idRutina": "1",
+        "tituloRutina": "Mi Rutina Ejemplo 1",
+        "ejercicios" : ["0","1","2"],
+        "foto": "../../../assets/img/mirutina1.jpg"
+      },
+      {
+        "idRutina": "2",
+        "tituloRutina": "Mi Rutina Ejemplo 2",
+        "ejercicios" : ["3","4","5"],
+        "foto": "../../../assets/img/mirutina2.jpeg"
+      },
+      {
+        "idRutina": "3",
+        "tituloRutina": "Mi Rutina Ejemplo 3",
+        "ejercicios" : ["1","3","5"],
+        "foto": "../../../assets/img/mirutina3.jpg"
+      }
+]

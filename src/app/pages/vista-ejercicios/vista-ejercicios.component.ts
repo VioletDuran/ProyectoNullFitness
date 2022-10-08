@@ -15,16 +15,10 @@ import { Router } from '@angular/router';
 
 export class VistaEjerciciosComponent implements OnInit {
   arrayEjercicios:VistaEjercicios[] = []
-  obtenerid:string | null = "";
-  constructor(private arrayEjerciciosAux:VistaEjerciciosService, private arrayEjerciciosPublicosAux:EjerciciosPublicosService, private _route:ActivatedRoute,private router: Router) { 
+  constructor(private arrayEjerciciosAux:VistaEjerciciosService) { 
   }
   ngOnInit(): void {
-    this.obtenerid = this._route.snapshot.paramMap.get('id');
-    if(this._route.snapshot.paramMap.get('id') == "0"){
       this.arrayEjercicios = this.arrayEjerciciosAux.arregloVistaEjercicio;
-    }else{
-      this.arrayEjercicios = this.arrayEjerciciosPublicosAux.ejerciciosPublicos;
     }
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+
 }

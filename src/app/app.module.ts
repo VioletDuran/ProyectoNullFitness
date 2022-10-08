@@ -14,6 +14,7 @@ import { EjercicioComponent } from './pages/ejercicio/ejercicio.component';
 import { LoginRegistroComponent } from './pages/login-registro/login-registro.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { RegistroComponent } from './pages/registro/registro.component';
+import { MisEjerciciosComponent } from './pages/mis-ejercicios/mis-ejercicios.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RegistroComponent } from './pages/registro/registro.component';
     MiPerfilComponent,
     EjercicioComponent,
     LoginRegistroComponent,
-    RegistroComponent
+    RegistroComponent,
+    MisEjerciciosComponent
   ],
   imports: [
     BrowserModule,

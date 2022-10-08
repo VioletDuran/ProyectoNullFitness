@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { vistaPerfil } from './vista-perfil.type';
+import rutinas from '../../../app/datos/misRutinas.json';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,7 @@ import { vistaPerfil } from './vista-perfil.type';
 export class VistaPerfilService {
   arrayRutinas:vistaPerfil[] = [];
   constructor() {
-    this.generarNumeros()
-  }
-  generarNumeros(){
-    for (let i = 0; i < 6; i++) {
-      this.arrayRutinas[i] = {tituloRutina:"Rutina " + (i+1)};
-    }
+    this.arrayRutinas = rutinas;
   }
 }
 
