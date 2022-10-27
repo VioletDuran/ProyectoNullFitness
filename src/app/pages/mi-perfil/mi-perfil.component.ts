@@ -12,7 +12,9 @@ export class MiPerfilComponent implements OnInit {
   constructor(private arrayMostrarAux:VistaPerfilService) { }
 
   ngOnInit(): void {
-    this.arrayMostrar = this.arrayMostrarAux.arrayRutinas;
+    this.arrayMostrarAux.devolverRutinas().subscribe((valor) =>{
+      this.arrayMostrar = valor;
+    })
   }
 
 }

@@ -14,30 +14,23 @@ import { EjerciciosPublicosService } from 'src/app/services/ejercicios-publicos.
 export class MisEjerciciosComponent implements OnInit {
 
   ejerciciosUsuario : EjerciciosPublicos[] | any = [];
-  ejerciciosTotales : EjerciciosPublicos[] = [];
-  rutinasTotales : vistaPerfil[] = [];
+  ejerciciosTotales : EjerciciosPublicos[] | any = [];
   rutinaActual : vistaPerfil | any = "";
+  rutinaTotales : vistaPerfil[] | any = "";
 
   constructor(private _route:ActivatedRoute,private router: Router, private ejerciciosArray:EjerciciosPublicosService, private rutinasArray:VistaPerfilService) { }
 
   ngOnInit(): void {
-    this.rutinasTotales = this.rutinasArray.arrayRutinas;
-    this.ejerciciosTotales = this.ejerciciosArray.ejerciciosPublicos;
-    this.generarEjercicios();
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.rutinasArray.devolverRutinas().subscribe((valor) =>{
+      this.rutinaTotales = valor;
+      this.rutinaActual = this.rutinasArray.encontrarRutina(this._route.snapshot.paramMap.get('id'),this.rutinaTotales);
+    })
+    this.ejerciciosArray.devolverEjercicios().subscribe((valor) => {
+      this.ejerciciosTotales = valor;
+      this.ejerciciosUsuario = this.ejerciciosArray.retornarEjerciciosPrivados(this.rutinaActual.ejercicios,this.ejerciciosTotales);
+    })
+    //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-  generarEjercicios(){
-    for(let aux of this.rutinasTotales){
-      if(aux.idRutina == this._route.snapshot.paramMap.get('id')){
-        let rutinaAux = aux;
-        this.rutinaActual = aux;
-        for(let auxEjercicio of rutinaAux.ejercicios){
-          console.log(this.ejerciciosTotales.find(ejercicio => ejercicio.id === auxEjercicio));
-          this.ejerciciosUsuario.push(this.ejerciciosTotales.find(ejercicio => ejercicio.id === auxEjercicio));
-        }
-      }
-    }
-  }
 
 }

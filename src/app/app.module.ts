@@ -15,6 +15,7 @@ import { LoginRegistroComponent } from './pages/login-registro/login-registro.co
 import {ReactiveFormsModule} from "@angular/forms";
 import { RegistroComponent } from './pages/registro/registro.component';
 import { MisEjerciciosComponent } from './pages/mis-ejercicios/mis-ejercicios.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,13 +29,14 @@ import { MisEjerciciosComponent } from './pages/mis-ejercicios/mis-ejercicios.co
     EjercicioComponent,
     LoginRegistroComponent,
     RegistroComponent,
-    MisEjerciciosComponent
+    MisEjerciciosComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

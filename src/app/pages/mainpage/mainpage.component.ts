@@ -9,12 +9,16 @@ import {EjerciciosPublicosService} from "../../services/ejercicios-publicos.serv
 })
 export class MainpageComponent implements OnInit {
 
+  ejerciciosTotales : EjerciciosPublicos[] | any = [];
   ejerciciopublico: EjerciciosPublicos[] = [];
 
   constructor(private ejerciciospublicos:EjerciciosPublicosService) { }
 
   ngOnInit(): void {
-    this.ejerciciopublico = this.randomNumber(this.ejerciciospublicos.ejerciciosPublicos);
+   this.ejerciciospublicos.devolverEjercicios().subscribe((valor) => {
+      this.ejerciciosTotales = valor;
+      this.ejerciciopublico = this.randomNumber(this.ejerciciosTotales);
+    })
   }
 
   randomNumber(arreglo:EjerciciosPublicos[]){

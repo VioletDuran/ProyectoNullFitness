@@ -30,10 +30,12 @@ export class EjercicioComponent implements OnInit {
   constructor(private ejerciciospublicos:EjerciciosPublicosService, private _route:ActivatedRoute, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.ejerciciopublicoUnico = this.ejerciciospublicos.ejerciciosPublicos;
-    this.ejercicioEspecifico = this.obtenerObjeto(this.ejerciciospublicos.ejerciciosPublicos);
-    this.url = this.ejercicioEspecifico.video;
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    this.ejerciciospublicos.devolverEjercicios().subscribe((valor) => {
+      this.ejerciciopublicoUnico = valor;
+      this.ejercicioEspecifico = this.obtenerObjeto(this.ejerciciopublicoUnico);
+      this.url = this.ejercicioEspecifico.video;
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    })
   }
   
   obtenerObjeto(aux: EjerciciosPublicos[]){
