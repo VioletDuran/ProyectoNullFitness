@@ -20,7 +20,6 @@ export class EjercicioComponent implements OnInit {
     tituloFoto:"",
     foto:"",
     descripcion:"",
-    tituloSegundo: "",
     descripcionMusculos: [],
     video: ""
   };
@@ -54,7 +53,6 @@ export class EjercicioComponent implements OnInit {
       tituloFoto:"",
       foto:"",
       descripcion:"",
-      tituloSegundo: "",
       descripcionMusculos: [],
       video: ""
     };

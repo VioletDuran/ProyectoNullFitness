@@ -4,7 +4,6 @@ export interface EjerciciosPublicos {
     tituloFoto:string;
     foto:string;
     descripcion:String;
-    tituloSegundo:String;
     descripcionMusculos:String[];
     video:string;
 }
