@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import { RegistroServiceService } from 'src/app/services/servicioRegistro/registro-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -39,7 +40,28 @@ export class RegistroComponent implements OnInit {
   registrarse(){
     if (this.formularioRegistro.status === 'VALID') {
       let datos = this.formularioRegistro.value;
-      this.servicio.completarRegistro(datos);
+      //this.servicio.completarRegistro(datos);
+      this.servicio.revisarCorreo({"correo":datos.correo}).subscribe((value) =>{
+        console.log(value);
+        if(value == true){
+          Swal.fire({
+            title: 'Error!',
+            text: 'El correo ya se encuentra registrado.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: "#6D0101"
+          })
+        }else{
+          this.servicio.completarRegistro(datos);
+          Swal.fire({
+            title: 'Registro exitoso!',
+            text: 'La cuenta se creo de manera correcta, saldras de manera automatica en 5 segundos.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: "#33cc33"
+          })
+        }
+      })
     }
   }
 }
