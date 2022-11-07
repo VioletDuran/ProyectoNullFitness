@@ -183,6 +183,9 @@ CREATE TABLE IF NOT EXISTS ejercicios_musculos (
     ON UPDATE CASCADE)
 ;
 
+INSERT INTO tipousuarios (idtipo,tipo) VALUES (2,'administrador');
+INSERT INTO tipousuarios (idtipo,tipo) VALUES (1,'usuario');
+
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 
 

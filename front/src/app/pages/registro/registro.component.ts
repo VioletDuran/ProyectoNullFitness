@@ -42,7 +42,6 @@ export class RegistroComponent implements OnInit {
       let datos = this.formularioRegistro.value;
       //this.servicio.completarRegistro(datos);
       this.servicio.revisarCorreo({"correo":datos.correo}).subscribe((value) =>{
-        console.log(value);
         if(value == true){
           Swal.fire({
             title: 'Error!',
@@ -55,11 +54,12 @@ export class RegistroComponent implements OnInit {
           this.servicio.completarRegistro(datos);
           Swal.fire({
             title: 'Registro exitoso!',
-            text: 'La cuenta se creo de manera correcta, saldras de manera automatica en 5 segundos.',
+            text: 'La cuenta se creo de manera correcta',
             icon: 'success',
             confirmButtonText: 'Aceptar',
-            confirmButtonColor: "#33cc33"
+            confirmButtonColor: '#00a000'
           })
+          this.router.navigate(['']);
         }
       })
     }
