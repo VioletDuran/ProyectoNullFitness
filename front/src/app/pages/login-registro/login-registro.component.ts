@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
-import { interval, take, finalize } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,11 +11,20 @@ import Swal from 'sweetalert2';
 })
 export class LoginRegistroComponent implements OnInit {
   formularioLogin!: FormGroup;
-
   constructor(private formBuilder: FormBuilder, private router: Router, private login: ServicioLoginService) {
   }
 
   ngOnInit(): void {
+    if(this.login.isLoggedIn == true){
+      Swal.fire({
+        title: 'Ya estas logeado',
+        text: 'Tu sesion esta activa.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#6D0101'
+      })
+      this.router.navigate(['']);
+    }
     let formulario = {
       correo: ['', Validators.compose([
         Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),

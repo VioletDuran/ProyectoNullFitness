@@ -44,7 +44,7 @@ const registrarUsuario = async (req, res) => {
 
 const loginUsuario = async (req,res) => {
     const {correo,contraseña} = req.body;
-    const response = await pool.query('select idusuario,correo, contraseña, nombreusuario, edad, nombre from usuarios where correo = $1',[correo]);
+    const response = await pool.query('select idusuario,correo, contraseña, nombreusuario, edad, nombre, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio from usuarios where correo = $1',[correo]);
     const bcrypt = require('bcrypt');
     const jwt = require('jsonwebtoken');
     if(response.rows.length != 0 && bcrypt.compareSync(contraseña, response.rows[0].contraseña)){

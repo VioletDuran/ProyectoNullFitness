@@ -25,13 +25,14 @@ export class RegistroComponent implements OnInit {
       ])],
       edad: ['', Validators.compose([
           Validators.pattern(/^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/),
+          Validators.required
       ])],
       correo: ['', Validators.compose([
           Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
           Validators.required
       ])],
       contraseña: ['', Validators.compose([
-          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/),
+          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[<>()[\]\\.,;:\s@\-*"]?)[A-Za-z\d<>()[\]\\.,;:\s@\-*"]{6,}$/),
           Validators.required
       ])]
     }

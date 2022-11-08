@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EjerciciosPublicos} from "../../services/ejercicios-publicos.type";
 import {EjerciciosPublicosService} from "../../services/ejercicios-publicos.service";
+import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -12,12 +13,13 @@ export class MainpageComponent implements OnInit {
   ejerciciosTotales : EjerciciosPublicos[] | any = [];
   ejerciciopublico: EjerciciosPublicos[] = [];
 
-  constructor(private ejerciciospublicos:EjerciciosPublicosService) { }
+  constructor(private ejerciciospublicos:EjerciciosPublicosService, private usuarioLogin:ServicioLoginService) { }
 
   ngOnInit(): void {
    this.ejerciciospublicos.devolverEjercicios().subscribe((valor) => {
       this.ejerciciosTotales = valor;
       this.ejerciciopublico = this.randomNumber(this.ejerciciosTotales);
+      this.usuarioLogin.loggedIn();
     })
   }
 
@@ -30,7 +32,6 @@ export class MainpageComponent implements OnInit {
       [arreglo[currentIndex], arreglo[randomIndex]] = [
         arreglo[randomIndex], arreglo[currentIndex]];
     }
-  
     return arreglo;
   }
 

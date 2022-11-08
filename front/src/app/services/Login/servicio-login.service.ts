@@ -30,7 +30,28 @@ export class ServicioLoginService {
   //  return this.httpClient.post(this.url +'/login',usuario);
   //}
 
-  
+  llenarDatos(Token:any){
+    this.usuario.idusuario = Token.data.idusuario;
+    this.usuario.nombreusuario = Token.data.nombreusuario;
+    this.usuario.edad = Token.data.edad;
+    this.usuario.nombre = Token.data.nombre;
+    if(Token.data.peso != undefined){
+      this.usuario.peso = Token.data.peso;
+    }
+    if(Token.data.nacionalidad != undefined){
+      this.usuario.nacionalidad = Token.data.nacionalidad;
+    }
+    if(Token.data.contextura != undefined){
+      this.usuario.contextura = Token.data.contextura;
+    }
+    if(Token.data.objetivo != undefined){
+      this.usuario.objetivo = Token.data.objetivo;
+    }
+    if(Token.data.cantidad_ejercicio != undefined){
+      this.usuario.cantidad_ejercicio = Token.data.cantidad_ejercicio;
+    }
+    this.isLoggedIn = true;
+  }
 
   async devolverLogin(correo:any,contraseña:any){
     const url = this.url +'/login';
@@ -49,11 +70,7 @@ export class ServicioLoginService {
           return false
         }
         const decodedToken = this.helper.decodeToken(body.token);
-        this.usuario.idusuario = decodedToken.data.idusuario;
-        this.usuario.nombreusuario = decodedToken.data.nombreusuario;
-        this.usuario.edad = decodedToken.data.edad;
-        this.usuario.nombre = decodedToken.data.nombre;
-        this.isLoggedIn = true;
+        this.llenarDatos(decodedToken);
         localStorage.setItem('token', body.token);
         return true;
       } catch(error) {
@@ -72,7 +89,9 @@ export class ServicioLoginService {
       this.logout;
       return false
     }
-    return true;
+    if(this.isLoggedIn == false){
+      this.llenarDatos(this.helper.decodeToken(token));
+    }
   }
 
 }

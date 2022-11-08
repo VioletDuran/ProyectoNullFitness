@@ -13,15 +13,20 @@
             <div class = "container">
                 <div class = "row">
                     <div class = "col">
-                            <h4 class = "fw-bolder margen">Nombre: <h5 class = "quitarSalto margenLetras fw-bolder">Diego Duran.</h5></h4>
-                            <h4 class = "fw-bolder margen">Edad: <h5 class = "quitarSalto margenLetras fw-bolder">20.</h5></h4>
-                            <h4 class = "fw-bolder margen">Peso: <h5 class = "quitarSalto margenLetras fw-bolder">80 Kilogramos.</h5></h4>
-                            <h4 class = "fw-bolder margen">Nacionalidad: <h5 class = "quitarSalto margenLetras fw-bolder">Chilena.</h5></h4>
+                            <h4 class = "fw-bolder margen">Nombre: <h5 class = "quitarSalto margenLetras fw-bolder">{{Usuario.nombre}}</h5></h4>
+                            <h4 class = "fw-bolder margen">Edad: <h5 class = "quitarSalto margenLetras fw-bolder">{{Usuario.edad}}</h5></h4>
+                            <h4 class = "fw-bolder margen">Peso: <h5 class = "quitarSalto margenLetras fw-bolder">{{Usuario.peso}}</h5></h4>
+                            <h4 class = "fw-bolder margen">Nacionalidad: <h5 class = "quitarSalto margenLetras fw-bolder">{{Usuario.nacionalidad}}</h5></h4>
                     </div>
                     <div class = "col">
-                        <h4 class = "fw-bolder margen">Contextura: <h5 class = "quitarSalto margenLetras fw-bolder">Musculosa.</h5></h4>
-                        <h4 class = "fw-bolder margen">Objetivo: <h5 class = "quitarSalto margenLetras fw-bolder">Definir.</h5></h4>
-                        <h4 class = "fw-bolder margen">Cantidad de ejercicio: <h5 class = "quitarSalto margenLetras fw-bolder">5 Veces por semana.</h5></h4>
+                        <h4 class = "fw-bolder margen">Contextura: <h5 class = "quitarSalto margenLetras fw-bolder">{{Usuario.contextura}}</h5></h4>
+                        <h4 class = "fw-bolder margen">Objetivo: <h5 class = "quitarSalto margenLetras fw-bolder">{{Usuario.objetivo}}</h5></h4>
+                        <h4 class = "fw-bolder margen">Cantidad de ejercicio: <h5 class = "quitarSalto margenLetras fw-bolder">{{Usuario.cantidad_ejercicio}}</h5></h4>
+                    </div>
+                </div>
+                <div class = "row text-center my-5">
+                    <div class = "col mx-auto">
+                        <button (click)="editarInformacion()" class="btn btn-danger rounded-pill text-uppercase fw-bolder text-custom">Configurar Informacion</button>
                     </div>
                 </div>
             </div>

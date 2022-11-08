@@ -16,7 +16,7 @@
 									       aria-describedby="userRealNameHelp"
 									       placeholder="Ej: Sergio" formControlName="nombre">
 
-									<div *ngIf="formularioRegistro.get('nombreRealUsuario')?.touched && formularioRegistro.get('nombreRealUsuario')?.errors?.['required']"
+									<div *ngIf="formularioRegistro.get('nombre')?.touched && formularioRegistro.get('nombre')?.errors?.['required']"
 									     class="errorCualquiera">Este campo es obligatorio
 									</div>
 
@@ -51,10 +51,10 @@
 									<input type="password" class="form-input" id="campoContraseña"
 									       placeholder="**********"
 									       formControlName="contraseña">
-									<div *ngIf="formularioRegistro.get('password')?.touched && formularioRegistro.get('password')?.errors?.['required']"
+									<div *ngIf="formularioRegistro.get('contraseña')?.touched && formularioRegistro.get('contraseña')?.errors?.['required']"
 									     class="errorCualquiera">Este campo es obligatorio
 									</div>
-									<div *ngIf="formularioRegistro.get('password')?.touched && formularioRegistro.get('password')?.errors?.['pattern']"
+									<div *ngIf="formularioRegistro.get('contraseña')?.touched && formularioRegistro.get('contraseña')?.errors?.['pattern']"
 									     class="errorCualquiera">
 										 <p class = "text-justify">La contraseña debe como minimo una letra, un numero
 											y 6 caracteres</p>
