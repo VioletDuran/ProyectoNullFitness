@@ -40,8 +40,7 @@ export class RegistroComponent implements OnInit {
   registrarse(){
     if (this.formularioRegistro.status === 'VALID') {
       let datos = this.formularioRegistro.value;
-      //this.servicio.completarRegistro(datos);
-      this.servicio.revisarCorreo({"correo":datos.correo}).subscribe((value) =>{
+      this.servicio.revisarCorreo(datos.correo).subscribe((value) =>{
         if(value == true){
           Swal.fire({
             title: 'Error!',

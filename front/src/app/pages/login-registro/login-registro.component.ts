@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
+import { interval, take, finalize } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,11 +30,11 @@ export class LoginRegistroComponent implements OnInit {
     this.formularioLogin = this.formBuilder.group(formulario);
 
   }
-  iniciarSesion() {
+  async iniciarSesion() {
     let datos = this.formularioLogin.value;
     if (this.formularioLogin.status === 'VALID') {
-      this.login.devolverLogin({correo: datos.correo, contraseña: datos.contraseña}).subscribe((valor) => {
-        if(valor == true){
+     await this.login.devolverLogin(datos.correo,datos.contraseña);
+        if(this.login.isLoggedIn == true){
           Swal.fire({
             title: 'Inicio de sesion exitoso!',
             text: 'Iniciaste de forma correcta.',
@@ -51,7 +52,6 @@ export class LoginRegistroComponent implements OnInit {
             confirmButtonColor: "#6D0101"
           })
         }
-      })
+      }
     }
   }
-}
