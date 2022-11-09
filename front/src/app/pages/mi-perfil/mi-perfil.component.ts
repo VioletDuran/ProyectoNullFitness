@@ -25,13 +25,14 @@ export class MiPerfilComponent implements OnInit {
     cantidad_ejercicio : ""
   };
   datosCargados: boolean = false;
+  fileTemp:any;
   constructor(private perfil:VistaPerfilService, private estado:ServicioLoginService, private router:Router) { }
 
   ngOnInit(): void {
+    this.estado.loggedIn();
     if(this.datosCargados == false){
       this.perfil.cargarDatos(this.estado.idUsuario).subscribe((valor) =>{
         this.Usuario = valor;
-        console.log(this.Usuario);
       })
     }
 
@@ -40,6 +41,27 @@ export class MiPerfilComponent implements OnInit {
     })
   }
 
+  cambiarFoto($event:any) {
+    //const [ file ] = $event.target.files;
+    Swal.fire({
+      title: 'Deseas confirmar el archivo?',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: 'green',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      preConfirm:() => {
+        this.enviarFoto($event);
+      }
+    })
+  }
+
+  enviarFoto(file:any){
+    this.perfil.guardarFoto(file).subscribe((valor)=>{
+      console.log(valor);
+    })
+  }
+  
   cerrarSesion(){
     this.estado.logout();
     this.router.navigate(['']);

@@ -3,6 +3,12 @@
     <div class = "row my-3">
         <div class = "col-lg-3 text-center mt-3">
             <img src="../../../assets/img/usuario.png" alt="Usuario Generico" class="tamano-foto">
+            <div class = "my-3">
+                <label for="file-upload" class="btn btn-danger rounded-pill text-uppercase fw-bolder text-custom">
+                    Cambiar Foto
+                </label>
+                <input  (change) = "cambiarFoto($event)" id="file-upload" type="file" accept=".jpg,.png"/>
+            </div>
         </div>
         <div class = "col mt-3">
             <div class = "text-center">

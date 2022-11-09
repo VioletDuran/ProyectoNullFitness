@@ -8,6 +8,16 @@ const pool = new Pool({
     port: '5432'
 })
 
+const guardarFoto = (req, res) => {
+//let EDFile = req.files.file
+//EDFile.mv(`./files/${EDFile.name}`,err => {
+//    if(err) return res.status(500).send({ message : err })
+//
+//        return res.status(200).send(true);
+//    })
+    console.log(req);
+}
+
 const revisarCorreo =  async (req, res) => {
     const correo = req.params.correo;
     const response = await pool.query('select correo from usuarios where correo = $1',[correo]);
@@ -84,5 +94,6 @@ module.exports = {
     registrarUsuario,
     loginUsuario,
     modificarDatos,
-    devolverDatos
+    devolverDatos,
+    guardarFoto
 }

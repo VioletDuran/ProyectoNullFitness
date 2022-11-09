@@ -34,5 +34,8 @@ export class VistaPerfilService {
     return this.httpClient.get(this.urlHttp+'/devolverDatos'+`/${idusuario}`)
   }
 
+  guardarFoto(datoImagen:any): Observable<any> {
+    return this.httpClient.post(this.urlHttp+'/guardarFoto',datoImagen);
+  }
 }
 

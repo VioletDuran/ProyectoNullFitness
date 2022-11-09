@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   nombreUsuario text NOT NULL,
   edad INT NOT NULL,
   nombre text NOT NULL,
+  foto text NULL,
   peso INT NULL,
   nacionalidad text NULL,
   contextura text NULL,

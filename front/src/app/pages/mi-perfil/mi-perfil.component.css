@@ -24,4 +24,15 @@
 .tamaño-fotos {
   width: 30vh;
   height: 30vh;
+}
+
+.errorCualquiera {
+  margin-top: -10px;
+  font-size: 2vh;
+  color: red;
+  width: 300px;
+}
+
+input[type=file] {
+  display: none;
 }/*# sourceMappingURL=mi-perfil.component.css.map */
