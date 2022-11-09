@@ -3,53 +3,21 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from './servicio-login.type';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { datosModificables } from '../VistaPerfil/vista-perfil.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicioLoginService {
   url:string = "http://localhost:3000/users";
-  usuario: Usuario = {
-    idusuario : "",
-    nombreusuario : "",
-    edad : "",
-    nombre : "",
-    peso : "",
-    nacionalidad : "",
-    contextura : "",
-    objetivo : "",
-    cantidad_ejercicio : ""
-  };
+  idUsuario: string = "";
   isLoggedIn:boolean = false;
   helper = new JwtHelperService();
   
   constructor(private httpClient:HttpClient) { }
 
-
-  //devolverLogin(usuario:any): Observable<any> {
-  //  return this.httpClient.post(this.url +'/login',usuario);
-  //}
-
-  llenarDatos(Token:any){
-    this.usuario.idusuario = Token.data.idusuario;
-    this.usuario.nombreusuario = Token.data.nombreusuario;
-    this.usuario.edad = Token.data.edad;
-    this.usuario.nombre = Token.data.nombre;
-    if(Token.data.peso != undefined){
-      this.usuario.peso = Token.data.peso;
-    }
-    if(Token.data.nacionalidad != undefined){
-      this.usuario.nacionalidad = Token.data.nacionalidad;
-    }
-    if(Token.data.contextura != undefined){
-      this.usuario.contextura = Token.data.contextura;
-    }
-    if(Token.data.objetivo != undefined){
-      this.usuario.objetivo = Token.data.objetivo;
-    }
-    if(Token.data.cantidad_ejercicio != undefined){
-      this.usuario.cantidad_ejercicio = Token.data.cantidad_ejercicio;
-    }
+  llenarToken(Token:any){
+    this.idUsuario = Token.data.idusuario;
     this.isLoggedIn = true;
   }
 
@@ -70,7 +38,7 @@ export class ServicioLoginService {
           return false
         }
         const decodedToken = this.helper.decodeToken(body.token);
-        this.llenarDatos(decodedToken);
+        this.llenarToken(decodedToken);
         localStorage.setItem('token', body.token);
         return true;
       } catch(error) {
@@ -81,6 +49,7 @@ export class ServicioLoginService {
 
   logout() {
     localStorage.removeItem('token');
+    this.isLoggedIn = false;
   }
   
   loggedIn():any {
@@ -90,7 +59,7 @@ export class ServicioLoginService {
       return false
     }
     if(this.isLoggedIn == false){
-      this.llenarDatos(this.helper.decodeToken(token));
+      this.llenarToken(this.helper.decodeToken(token));
     }
   }
 

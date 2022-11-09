@@ -21,7 +21,7 @@ export class LoginRegistroComponent implements OnInit {
         text: 'Tu sesion esta activa.',
         icon: 'success',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#6D0101'
+        confirmButtonColor: 'green'
       })
       this.router.navigate(['']);
     }

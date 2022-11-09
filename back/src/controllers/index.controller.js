@@ -44,7 +44,7 @@ const registrarUsuario = async (req, res) => {
 
 const loginUsuario = async (req,res) => {
     const {correo,contraseña} = req.body;
-    const response = await pool.query('select idusuario,correo, contraseña, nombreusuario, edad, nombre, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio from usuarios where correo = $1',[correo]);
+    const response = await pool.query('select idusuario,contraseña from usuarios where correo = $1',[correo]);
     const bcrypt = require('bcrypt');
     const jwt = require('jsonwebtoken');
     if(response.rows.length != 0 && bcrypt.compareSync(contraseña, response.rows[0].contraseña)){
@@ -64,8 +64,25 @@ const loginUsuario = async (req,res) => {
     }
 }
 
+const modificarDatos =  async (req, res) => {
+    const {idusuario, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio} = req.body;
+    const response = await pool.query('UPDATE usuarios SET edad = $2,peso = $3, nacionalidad = $4, contextura = $5, objetivo = $6, cantidad_ejercicio = $7 WHERE idusuario = $1',[idusuario, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio])
+    if(response){
+        res.status(200).send(true);
+    }
+}
+
+const devolverDatos =  async (req, res) => {
+    const id = req.params.id;
+    const response = await pool.query('select idusuario, nombreusuario, nombre, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio from usuarios where idusuario = $1',[id]);
+    let resultado = response.rows[0];
+    return res.json(resultado);
+}   
+
 module.exports = {
     revisarCorreo,
     registrarUsuario,
-    loginUsuario
+    loginUsuario,
+    modificarDatos,
+    devolverDatos
 }

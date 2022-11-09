@@ -15,7 +15,6 @@ export class RegistroServiceService {
     this.httpClient.post(this.url+"/registro",form).subscribe();
   }
   revisarCorreo(correo:any): Observable<any> {
-    console.log(correo);
     return this.httpClient.get(this.url+`/${correo}`);
   }
 }
