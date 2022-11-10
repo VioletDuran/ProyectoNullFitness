@@ -88,6 +88,7 @@ const loginUsuario = async (req,res) => {
 
 const modificarDatos =  async (req, res) => {
     const {idusuario, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio} = req.body;
+    
     const response = await pool.query('UPDATE usuarios SET edad = $2,peso = $3, nacionalidad = $4, contextura = $5, objetivo = $6, cantidad_ejercicio = $7 WHERE idusuario = $1',[idusuario, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio])
     if(response){
         res.status(200).send(true);

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { VistaPerfilService } from 'src/app/services/VistaPerfil/vista-perfil.service';
 import { vistaPerfil } from 'src/app/services/VistaPerfil/vista-perfil.type';
 import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
-import { Usuario } from 'src/app/services/Login/servicio-login.type';
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
 import { datosModificables,usuarioFinal } from 'src/app/services/VistaPerfil/vista-perfil.type';
@@ -31,12 +30,23 @@ export class MiPerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.estado.loggedIn();
+
     if(this.datosCargados == false){
       this.perfil.cargarDatos(this.estado.idUsuario).subscribe((valor) =>{
         this.Usuario = valor;
         if(this.Usuario.foto == null){
           this.Usuario.foto = "../../../assets/img/usuario.png";
         }
+        if(this.Usuario.peso != null){
+          this.Usuario.peso = this.Usuario.peso + " Kg";
+        }
+        if(this.Usuario.cantidad_ejercicio != null){
+          this.Usuario.cantidad_ejercicio = this.Usuario.cantidad_ejercicio + " Semanal";
+        }
+        if(this.Usuario.edad != null){
+          this.Usuario.edad = this.Usuario.edad + " Años";
+        }
+        this.datosCargados = true;
       })
     }
 
@@ -49,10 +59,12 @@ export class MiPerfilComponent implements OnInit {
     const [ file ] = $event.target.files;
     let extension = file.name.split(".").pop();
     let nombreFinal = this.Usuario.idusuario + '.' + extension;
+
     this.fileTemp = {
       fileRaw:file,
       fileName:nombreFinal,
     }
+
     Swal.fire({
       title: 'Deseas confirmar el archivo?',
       icon: 'success',
@@ -67,8 +79,10 @@ export class MiPerfilComponent implements OnInit {
   }
 
   enviarFoto(){
+
     const body = new FormData();
     body.append('myFile', this.fileTemp.fileRaw, this.fileTemp.fileName);
+    
     this.perfil.guardarFoto(body).subscribe((valor)=>{
       if(valor == true){
         Swal.fire({

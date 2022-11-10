@@ -32,7 +32,7 @@ export class RegistroComponent implements OnInit {
           Validators.required
       ])],
       contraseña: ['', Validators.compose([
-          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[<>()[\]\\.,;:\s@\-*"]?)[A-Za-z\d<>()[\]\\.,;:\s@\-*"]{6,}$/),
+          Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.,*]).{8,}$/),
           Validators.required
       ])]
     }

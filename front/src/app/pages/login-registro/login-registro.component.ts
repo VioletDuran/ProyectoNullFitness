@@ -31,7 +31,7 @@ export class LoginRegistroComponent implements OnInit {
         Validators.required
       ])],
       contraseña: ['', Validators.compose([
-        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/),
+        Validators.pattern(/^.+$/),
         Validators.required
       ])]
     }
