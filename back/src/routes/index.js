@@ -9,7 +9,7 @@ router.get('/users/devolverDatos/:id', devolverDatos);
 //Posts
 router.post('/users/registro', registrarUsuario);
 router.post('/users/login',loginUsuario);
-router.post('/users/guardarFoto',guardarFoto);
+router.post('/users/guardarFoto',upload.single("myFile"),guardarFoto);
 
 //Puts
 router.put('/users/modificarDatos',modificarDatos);

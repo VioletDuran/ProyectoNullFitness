@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+const multer = require('multer');
 
 const pool = new Pool({
     host: 'localhost',
@@ -8,14 +9,25 @@ const pool = new Pool({
     port: '5432'
 })
 
-const guardarFoto = (req, res) => {
-//let EDFile = req.files.file
-//EDFile.mv(`./files/${EDFile.name}`,err => {
-//    if(err) return res.status(500).send({ message : err })
-//
-//        return res.status(200).send(true);
-//    })
-    console.log(req);
+
+const storage = multer.diskStorage({
+    filename: function (res, file, cb) {
+      const fileName = file.originalname;
+      cb(null, `${fileName}`);
+    },
+    destination: function (res, file, cb) {
+      cb(null, `./public`);
+    },
+  });
+  
+const upload = multer({ storage });
+
+const guardarFoto = async (req, res) => {
+  let file = req.file.filename;
+  let id = file.split(".");
+  file = "http://localhost:3000/" + file;
+  await pool.query('UPDATE usuarios SET foto = $1 where idusuario = $2', [file,id[0]]);
+  res.send(true);
 }
 
 const revisarCorreo =  async (req, res) => {
@@ -84,7 +96,7 @@ const modificarDatos =  async (req, res) => {
 
 const devolverDatos =  async (req, res) => {
     const id = req.params.id;
-    const response = await pool.query('select idusuario, nombreusuario, nombre, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio from usuarios where idusuario = $1',[id]);
+    const response = await pool.query('select idusuario, nombreusuario, nombre, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio, foto from usuarios where idusuario = $1',[id]);
     let resultado = response.rows[0];
     return res.json(resultado);
 }   
@@ -95,5 +107,6 @@ module.exports = {
     loginUsuario,
     modificarDatos,
     devolverDatos,
-    guardarFoto
+    guardarFoto,
+    upload
 }

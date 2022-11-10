@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const fileUpload = require('express-fileupload')
+
 
 
 
@@ -9,7 +9,7 @@ const fileUpload = require('express-fileupload')
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(fileUpload());
+app.use(express.static("./public"));
 
 //Rutas
 app.use(require('./routes/index'));

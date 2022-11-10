@@ -22,7 +22,8 @@ export class MiPerfilComponent implements OnInit {
     nacionalidad : "", 
     contextura : "", 
     objetivo : "", 
-    cantidad_ejercicio : ""
+    cantidad_ejercicio : "",
+    foto: ""
   };
   datosCargados: boolean = false;
   fileTemp:any;
@@ -33,6 +34,9 @@ export class MiPerfilComponent implements OnInit {
     if(this.datosCargados == false){
       this.perfil.cargarDatos(this.estado.idUsuario).subscribe((valor) =>{
         this.Usuario = valor;
+        if(this.Usuario.foto == null){
+          this.Usuario.foto = "../../../assets/img/usuario.png";
+        }
       })
     }
 
@@ -42,7 +46,13 @@ export class MiPerfilComponent implements OnInit {
   }
 
   cambiarFoto($event:any) {
-    //const [ file ] = $event.target.files;
+    const [ file ] = $event.target.files;
+    let extension = file.name.split(".").pop();
+    let nombreFinal = this.Usuario.idusuario + '.' + extension;
+    this.fileTemp = {
+      fileRaw:file,
+      fileName:nombreFinal,
+    }
     Swal.fire({
       title: 'Deseas confirmar el archivo?',
       icon: 'success',
@@ -51,14 +61,27 @@ export class MiPerfilComponent implements OnInit {
       cancelButtonText: 'Cancelar',
       showCancelButton: true,
       preConfirm:() => {
-        this.enviarFoto($event);
+        this.enviarFoto();
       }
     })
   }
 
-  enviarFoto(file:any){
-    this.perfil.guardarFoto(file).subscribe((valor)=>{
-      console.log(valor);
+  enviarFoto(){
+    const body = new FormData();
+    body.append('myFile', this.fileTemp.fileRaw, this.fileTemp.fileName);
+    this.perfil.guardarFoto(body).subscribe((valor)=>{
+      if(valor == true){
+        Swal.fire({
+          title: "Foto cambiada con exito!",
+          icon: "success",
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: 'green',
+          preConfirm:() => {
+            location.reload();
+          }
+        })
+      }
+      
     })
   }
   
