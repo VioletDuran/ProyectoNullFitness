@@ -1,19 +1,19 @@
 [
     {
-        "idRutina": "1",
-        "tituloRutina": "Mi Rutina Ejemplo 1",
+        "idrutina": "1",
+        "titulorutina": "Mi Rutina Ejemplo 1",
         "ejercicios" : ["0","1","2","3","4","5"],
         "foto": "../../../assets/img/mirutina1.jpg"
       },
       {
-        "idRutina": "2",
-        "tituloRutina": "Mi Rutina Ejemplo 2",
+        "idrutina": "2",
+        "titulorutina": "Mi Rutina Ejemplo 2",
         "ejercicios" : ["3","4","5","0","1","2"],
         "foto": "../../../assets/img/mirutina2.jpeg"
       },
       {
-        "idRutina": "3",
-        "tituloRutina": "Mi Rutina Ejemplo 3",
+        "idrutina": "3",
+        "titulorutina": "Mi Rutina Ejemplo 3",
         "ejercicios" : ["3","5","4","0","1","2"],
         "foto": "../../../assets/img/mirutina3.jpg"
       }

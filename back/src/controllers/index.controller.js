@@ -38,23 +38,40 @@ const revisarCorreo =  async (req, res) => {
         res.send(true);
     }else{
         pool.end;
-        res.status(200).send(false);
+        res.status(200).send(false); 
     }
 }
 
+const devolverRutinas = async (req, res) =>{
+    const id = req.params.id;
+    const response = await pool.query('select * from rutinas where idusuario = $1',[id]);
+    let resultado = response.rows;
+    return res.json(resultado);
+}
+
+const crearRutinas = async (idUsuario) =>{
+    for(let i = 1; i <= 6; i++){
+        let nombreRutina = "MiRutina " + i;
+        let fotoNormal = "../../../assets/img/mirutina1.jpg";
+        let descripcion = "Rutina preestablecida"
+        await pool.query('INSERT INTO rutinas (titulorutina, foto, descripcion,idusuario) VALUES ($1, $2, $3, $4)',[nombreRutina, fotoNormal, descripcion, idUsuario["idusuario"]]);
+    }
+    return;
+}
 
 
 const registrarUsuario = async (req, res) => {
     const { nombre, nombreUsuario, edad, correo, contraseña} = req.body;
-
     const bcrypt = require('bcrypt');
     const saltRounds = 10;
     let auxContraseña =  bcrypt.hashSync(contraseña, saltRounds, (err, hash) => {
         if (err) throw (err)
         contraseña = hash;
     });
-
-    let con = await pool.query('INSERT INTO usuarios (tipousuario, correo, contraseña, nombreusuario, edad, nombre) VALUES ($1, $2, $3, $4, $5, $6)', [2,correo,auxContraseña,nombreUsuario,edad,nombre]);
+    let fotoOriginal = "../../../assets/img/usuario.png";
+    let con = await pool.query('INSERT INTO usuarios (tipousuario, correo, contraseña, nombreusuario, edad, nombre, foto) VALUES ($1, $2, $3, $4, $5, $6, $7)', [2,correo,auxContraseña,nombreUsuario,edad,nombre, fotoOriginal]);
+    let obtenerId = await pool.query('select idusuario from usuarios where correo = $1',[correo]);
+    crearRutinas(obtenerId.rows[0]);
     if(!con){
         pool.end;
         res.status(200).send(false);
@@ -109,5 +126,6 @@ module.exports = {
     modificarDatos,
     devolverDatos,
     guardarFoto,
-    upload
+    upload,
+    devolverRutinas
 }

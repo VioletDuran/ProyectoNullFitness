@@ -30,13 +30,9 @@ export class MiPerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.estado.loggedIn();
-
     if(this.datosCargados == false){
       this.perfil.cargarDatos(this.estado.idUsuario).subscribe((valor) =>{
         this.Usuario = valor;
-        if(this.Usuario.foto == null){
-          this.Usuario.foto = "../../../assets/img/usuario.png";
-        }
         if(this.Usuario.peso != null){
           this.Usuario.peso = this.Usuario.peso + " Kg";
         }
@@ -50,7 +46,8 @@ export class MiPerfilComponent implements OnInit {
       })
     }
 
-    this.perfil.devolverRutinas().subscribe((valor) =>{
+    this.perfil.obtenerRutinas(this.estado.idUsuario).subscribe((valor) =>{
+      console.log(valor);
       this.arrayMostrar = valor;
     })
   }
@@ -408,34 +405,35 @@ export class MiPerfilComponent implements OnInit {
           Swal.showValidationMessage(`Porfavor eliga un objetivo valida`);
         }else if(cantidadUsuario < 0 || cantidadUsuario > 7 || cantidad == ''){
           Swal.showValidationMessage(`Porfavor ingresa una cantidad de ejercicio valida`);
-        }
-
-        let datosUsuario: datosModificables  = {
-          idusuario: this.estado.idUsuario,
-          edad: edad!,
-          peso: peso!,
-          nacionalidad: nacionalidadUsuario!,
-          contextura: contexturaUsuario!,
-          objetivo: objetivoUsuario!,
-          cantidad_ejercicio: cantidad!
-        }
-        
-        this.perfil.actualizarInformacionUsuario(datosUsuario).subscribe((valor) =>
-          {
-            this.perfil.cargarDatos(this.estado.idUsuario).subscribe((valor) =>{
-              this.Usuario = valor;
-              this.datosCargados = true;
-            })
-            if(valor == true){
-              Swal.fire({
-                title: 'Modificacion Correcta',
-                text: 'Se modifico tu informacion correctamente.',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: 'green'
-              })
+        }else{
+          let datosUsuario: datosModificables  = {
+            idusuario: this.estado.idUsuario,
+            edad: edad!,
+            peso: peso!,
+            nacionalidad: nacionalidadUsuario!,
+            contextura: contexturaUsuario!,
+            objetivo: objetivoUsuario!,
+            cantidad_ejercicio: cantidad!
           }
-        })
+          
+          this.perfil.actualizarInformacionUsuario(datosUsuario).subscribe((valor) =>
+            {
+              if(valor == true){
+                Swal.fire({
+                  title: 'Modificacion Correcta',
+                  text: 'Se modifico tu informacion correctamente.',
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: 'green',
+                  preConfirm: () => {
+                     location.reload();
+                  }
+                  
+                })
+            }
+          })
+
+        }
       }
     })
   }

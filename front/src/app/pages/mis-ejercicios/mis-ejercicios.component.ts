@@ -23,6 +23,7 @@ export class MisEjerciciosComponent implements OnInit {
   ngOnInit(): void {
     this.rutinasArray.devolverRutinas().subscribe((valor) =>{
       this.rutinaTotales = valor;
+      console.log(valor);
       this.rutinaActual = this.rutinasArray.encontrarRutina(this._route.snapshot.paramMap.get('id'),this.rutinaTotales);
     })
     this.ejerciciosArray.devolverEjercicios().subscribe((valor) => {

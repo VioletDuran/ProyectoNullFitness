@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS rutinas (
   idrutinas INT NOT NULL DEFAULT NEXTVAL ('rutinas_seq'),
   tituloRutina text NOT NULL,
   foto text NOT NULL,
+  descripcion text NULL,
   idUsuario INT NULL,
   PRIMARY KEY (idrutinas),
   CONSTRAINT idUsuario
@@ -87,10 +88,11 @@ CREATE TABLE IF NOT EXISTS rutinas (
 -- Table `ejercicios`
 -- SQLINES DEMO *** ------------------------------------
 DROP TABLE IF EXISTS ejercicios ;
+CREATE SEQUENCE ejercicios_seq;
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 CREATE TABLE IF NOT EXISTS ejercicios (
-  idEjercicio INT NOT NULL,
+  idEjercicio INT NOT NULL DEFAULT NEXTVAL ('ejercicios_seq'),
   tituloEjercicio text NOT NULL,
   tituloFoto text NOT NULL,
   foto text NOT NULL,
@@ -184,8 +186,7 @@ CREATE TABLE IF NOT EXISTS ejercicios_musculos (
     ON UPDATE CASCADE)
 ;
 
-INSERT INTO tipousuarios (idtipo,tipo) VALUES (2,'administrador');
-INSERT INTO tipousuarios (idtipo,tipo) VALUES (1,'usuario');
+
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 

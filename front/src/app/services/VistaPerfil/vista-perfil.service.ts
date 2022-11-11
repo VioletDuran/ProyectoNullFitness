@@ -15,15 +15,20 @@ export class VistaPerfilService {
   constructor(private httpClient:HttpClient) {
   }
   
-  ngOnInit(): void {
+  ngOnInit(): void { 
   }
 
   devolverRutinas(): Observable<any>{
     return this.httpClient.get(this.url);
   }
+ 
+  obtenerRutinas(idusuario:string): Observable<any>{
+    console.log(idusuario);
+    return this.httpClient.get(this.urlHttp +'/devolverRutinas'+`/${idusuario}`);
+  }
 
   encontrarRutina(id:string | any, rutinas:vistaPerfil[]){
-    return rutinas.find(rutinas => rutinas.idRutina === id);
+    return rutinas.find(rutinas => rutinas.idrutinas === id);
   }
 
   actualizarInformacionUsuario(usuario:datosModificables): Observable<any>{

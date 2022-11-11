@@ -1,8 +1,9 @@
 export interface vistaPerfil{
-    idRutina:string;
-    tituloRutina:string;
-    ejercicios:string[];
+    idrutinas:string;
+    titulorutina:string;
+    //ejercicios:string[];
     foto:string;
+    descripcion: string;
 }
 
 export interface datosModificables{
