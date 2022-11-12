@@ -29,9 +29,10 @@ export class MisEjerciciosComponent implements OnInit {
       this.ejerciciosTotales = valor2;
       this.idEjerciciosUsuario = valor3;
       for(let aux in this.idEjerciciosUsuario){
-        let auxA = parseInt(aux) + 1;
+        let auxA = Object.values(this.idEjerciciosUsuario[aux]);
         this.ejerciciosUsuario.push(this.ejerciciosTotales.find(ejercicio => String(ejercicio.idejercicio) === String(auxA))!);
       }
+
       this.datosCargados = true;
     })
   }
