@@ -4,14 +4,14 @@ INSERT INTO tipousuarios (idtipo,tipo) VALUES (2,'administrador');
 INSERT INTO tipousuarios (idtipo,tipo) VALUES (1,'usuario');
 
 --Musculos
-INSERT INTO musculos(musculo) VALUES('Biceps');
-INSERT INTO musculos(musculo) VALUES('Triceps');
-INSERT INTO musculos(musculo) VALUES('Pecho');
-INSERT INTO musculos(musculo) VALUES('Espalda');
-INSERT INTO musculos(musculo) VALUES('Gluteos');
-INSERT INTO musculos(musculo) VALUES('Gemelos');
-INSERT INTO musculos(musculo) VALUES('Trapecios');
-INSERT INTO musculos(musculo) VALUES('Dorsales');
+INSERT INTO musculos(musculo) VALUES('Biceps'); --1
+INSERT INTO musculos(musculo) VALUES('Triceps');--2
+INSERT INTO musculos(musculo) VALUES('Pecho');--3
+INSERT INTO musculos(musculo) VALUES('Espalda');--4
+INSERT INTO musculos(musculo) VALUES('Gluteos');--5
+INSERT INTO musculos(musculo) VALUES('Gemelos');--6
+INSERT INTO musculos(musculo) VALUES('Trapecios');--7
+INSERT INTO musculos(musculo) VALUES('Dorsales');--8
 
 --Ejercicios
 INSERT INTO ejercicios(tituloejercicio, titulofoto, foto, descripcion, video) VALUES ('Press de banca','Press de banca','../../../assets/img/press-banca-1.jpg', 'El press de banca es un ejercicio multiarticular que, lógicamente, no sólo implica a la musculatura pectoral. Por tanto, debemos de tener en cuenta cada uno de los músculos implicados en está acción para poder progresar en este ejercicio. Es uno de los mejores para trabajar el pecho.','https://www.youtube.com/embed/GeLq8cMODLc');
@@ -21,3 +21,20 @@ INSERT INTO ejercicios(tituloejercicio, titulofoto, foto, descripcion, video) VA
 INSERT INTO ejercicios(tituloejercicio, titulofoto, foto, descripcion, video) VALUES ('Cruces con polea alta','Cruces con polea alta','../../../assets/img/cruces.jpg', 'Los cruces con polea alta suelen ser más utilizados que los cruces desde polea baja. De pie, agarramos cada una de las anillas con cada mano y las bajamos hasta la altura de la cadera para nuevamente subirlas controlando el movimiento hasta la posición inicial.','https://www.youtube.com/embed/3hBloob8efo');
 INSERT INTO ejercicios(tituloejercicio, titulofoto, foto, descripcion, video) VALUES ('Extensión de tríceps','Extensión de tríceps','../../../assets/img/ext.jpg', 'Las extensiones tríceps en polea con agarre invertido son ejercicios que representan una variante de los clásicos ejercicios de polea, para el desarrollo de los músculos de los brazos. Esta variante, es particularmente efectiva al momento de entrenar los tríceps y los músculos de los antebrazos.','https://www.youtube.com/embed/FspY_qJBXZc');
 
+
+-- Musculos
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('1','3');
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('1','2');
+
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('2','5');
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('2','6');
+
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('3','4');
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('3','1');
+
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('4','5');
+
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('5','3');
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('5','2');
+
+INSERT INTO ejercicios_musculos(idejercicio, idmusculo) VALUES ('6','2');

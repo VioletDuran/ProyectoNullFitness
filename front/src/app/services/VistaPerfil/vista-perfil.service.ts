@@ -23,7 +23,6 @@ export class VistaPerfilService {
   }
  
   obtenerRutinas(idusuario:string): Observable<any>{
-    console.log(idusuario);
     return this.httpClient.get(this.urlHttp +'/devolverRutinas'+`/${idusuario}`);
   }
 

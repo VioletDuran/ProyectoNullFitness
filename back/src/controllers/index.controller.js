@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 const multer = require('multer');
+const { json } = require('express');
 
 const pool = new Pool({
     host: 'localhost',
@@ -27,6 +28,7 @@ const guardarFoto = async (req, res) => {
   let id = file.split(".");
   file = "http://localhost:3000/" + file;
   await pool.query('UPDATE usuarios SET foto = $1 where idusuario = $2', [file,id[0]]);
+  pool.end;
   res.send(true);
 }
 
@@ -42,9 +44,41 @@ const revisarCorreo =  async (req, res) => {
     }
 }
 
+const obtenerEjerciciosPrivados = async(req,res) =>{
+    const id = req.params.id;
+    const response = await pool.query('select idejercicios from rutinas_ejercicios where idrutinas = $1',[id]);
+    pool.end;
+    console.log(response.rows);
+    return res.send(response.rows);
+}
+
 const devolverRutinas = async (req, res) =>{
     const id = req.params.id;
     const response = await pool.query('select * from rutinas where idusuario = $1',[id]);
+    pool.end;
+    let resultado = response.rows;
+    return res.json(resultado);
+}
+
+const generarEjerciciosBasicos = async(idUsuario) =>{
+    idUsuario = idUsuario["idusuario"];
+    let rutinas = await pool.query('select idrutinas from rutinas where idusuario = $1',[idUsuario]);
+    for(let i = 0; i <= 5; i++){
+        await pool.query('INSERT INTO rutinas_ejercicios(idrutinas, idejercicios) VALUES ($1,$2)',[rutinas.rows[i]["idrutinas"],1]);
+        await pool.query('INSERT INTO rutinas_ejercicios(idrutinas, idejercicios) VALUES ($1,$2)',[rutinas.rows[i]["idrutinas"],2]);
+        await pool.query('INSERT INTO rutinas_ejercicios(idrutinas, idejercicios) VALUES ($1,$2)',[rutinas.rows[i]["idrutinas"],3]);
+        await pool.query('INSERT INTO rutinas_ejercicios(idrutinas, idejercicios) VALUES ($1,$2)',[rutinas.rows[i]["idrutinas"],4]);
+        await pool.query('INSERT INTO rutinas_ejercicios(idrutinas, idejercicios) VALUES ($1,$2)',[rutinas.rows[i]["idrutinas"],5]);
+        await pool.query('INSERT INTO rutinas_ejercicios(idrutinas, idejercicios) VALUES ($1,$2)',[rutinas.rows[i]["idrutinas"],6]);
+    }
+    pool.end;
+    return;
+}
+
+const devolverRutinasEspecifica = async (req, res) =>{
+    const id = req.params.id;
+    const response = await pool.query('select * from rutinas where idrutinas = $1',[id]);
+    pool.end;
     let resultado = response.rows;
     return res.json(resultado);
 }
@@ -55,7 +89,9 @@ const crearRutinas = async (idUsuario) =>{
         let fotoNormal = "../../../assets/img/mirutina1.jpg";
         let descripcion = "Rutina preestablecida"
         await pool.query('INSERT INTO rutinas (titulorutina, foto, descripcion,idusuario) VALUES ($1, $2, $3, $4)',[nombreRutina, fotoNormal, descripcion, idUsuario["idusuario"]]);
+        pool.end;
     }
+    generarEjerciciosBasicos(idUsuario);
     return;
 }
 
@@ -107,6 +143,7 @@ const modificarDatos =  async (req, res) => {
     const {idusuario, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio} = req.body;
     
     const response = await pool.query('UPDATE usuarios SET edad = $2,peso = $3, nacionalidad = $4, contextura = $5, objetivo = $6, cantidad_ejercicio = $7 WHERE idusuario = $1',[idusuario, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio])
+    pool.end;
     if(response){
         res.status(200).send(true);
     }
@@ -115,9 +152,25 @@ const modificarDatos =  async (req, res) => {
 const devolverDatos =  async (req, res) => {
     const id = req.params.id;
     const response = await pool.query('select idusuario, nombreusuario, nombre, edad, peso, nacionalidad, contextura, objetivo, cantidad_ejercicio, foto from usuarios where idusuario = $1',[id]);
+    pool.end;
     let resultado = response.rows[0];
     return res.json(resultado);
-}   
+}
+
+const obtenerEjerciciosTotales = async (req, res) =>{
+    let ejercicios = await pool.query('select * from ejercicios');
+    for(i = 0; i < ejercicios.rows.length; i++){
+        let idMusculos = await pool.query('select idmusculo from ejercicios_musculos where idejercicio = $1',[ejercicios.rows[i]["idejercicio"]]);
+        let arregloMusculos = [];
+        for(j = 0; j < idMusculos.rows.length; j++){
+            let musculo = await pool.query('select musculo from musculos where idmusculo = $1',[idMusculos.rows[j]["idmusculo"]]);
+            arregloMusculos.push(musculo.rows[0]["musculo"]);
+        }
+        ejercicios.rows[i]["musculos"] = arregloMusculos;
+    }
+    pool.end;
+    res.json(ejercicios.rows);
+}
 
 module.exports = {
     revisarCorreo,
@@ -127,5 +180,8 @@ module.exports = {
     devolverDatos,
     guardarFoto,
     upload,
-    devolverRutinas
+    devolverRutinas,
+    obtenerEjerciciosPrivados,
+    obtenerEjerciciosTotales,
+    devolverRutinasEspecifica
 }

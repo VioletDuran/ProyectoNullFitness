@@ -10,14 +10,15 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { MisEjerciciosComponent } from './pages/mis-ejercicios/mis-ejercicios.component';
 
 const routes: Routes = [
-  {path:'',component:MainpageComponent},
   {path:'Ejercicios',component:VistaEjerciciosComponent},
   {path:'Rutinas',component:VistaRutinasComponent},
   {path:'MiPerfil',component:MiPerfilComponent},
   {path:'Ejercicio/:id',component:EjercicioComponent},
   {path:'Login',component:LoginRegistroComponent},
   {path:'Registro', component:RegistroComponent},
-  {path:'MisEjercicios/:id', component:MisEjerciciosComponent}
+  {path:'MisEjercicios/:id', component:MisEjerciciosComponent},
+  {path:'',component:MainpageComponent},
+  {path:'**',redirectTo:''}
 ];
 
 @NgModule({

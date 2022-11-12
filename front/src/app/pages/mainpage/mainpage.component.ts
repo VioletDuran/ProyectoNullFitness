@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {EjerciciosPublicos} from "../../services/ejercicios-publicos.type";
-import {EjerciciosPublicosService} from "../../services/ejercicios-publicos.service";
 import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
+import { EjerciciosPublicosAux } from '../../services/ejercicios-publicos.type';
+import { EjercicioPrivadoService } from 'src/app/services/ejerciciosPrivados/ejercicio-privado.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -10,20 +10,20 @@ import { ServicioLoginService } from 'src/app/services/Login/servicio-login.serv
 })
 export class MainpageComponent implements OnInit {
 
-  ejerciciosTotales : EjerciciosPublicos[] | any = [];
-  ejerciciopublico: EjerciciosPublicos[] = [];
+  ejerciciosTotales : EjerciciosPublicosAux[] | any = [];
+  ejerciciopublico: EjerciciosPublicosAux[] = [];
 
-  constructor(private ejerciciospublicos:EjerciciosPublicosService, private usuarioLogin:ServicioLoginService) { }
+  constructor(private usuarioLogin:ServicioLoginService, private probar:EjercicioPrivadoService) { }
 
   ngOnInit(): void {
-   this.ejerciciospublicos.devolverEjercicios().subscribe((valor) => {
+   this.probar.obtenerEjerciciosTotales().subscribe((valor) => {
       this.ejerciciosTotales = valor;
       this.ejerciciopublico = this.randomNumber(this.ejerciciosTotales);
       this.usuarioLogin.loggedIn();
     })
   }
 
-  randomNumber(arreglo:EjerciciosPublicos[]){
+  randomNumber(arreglo:EjerciciosPublicosAux[]){
     let currentIndex = arreglo.length,  randomIndex;
 
     while (currentIndex != 0) {

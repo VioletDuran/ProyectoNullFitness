@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { VistaPerfilService } from 'src/app/services/VistaPerfil/vista-perfil.service';
-import { vistaPerfil } from 'src/app/services/VistaPerfil/vista-perfil.type';
 import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
 import { datosModificables,usuarioFinal } from 'src/app/services/VistaPerfil/vista-perfil.type';
+import { Rutina } from 'src/app/services/ejerciciosPrivados/ejercicio-privado.type';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -12,7 +12,7 @@ import { datosModificables,usuarioFinal } from 'src/app/services/VistaPerfil/vis
   styleUrls: ['./mi-perfil.component.scss']
 })
 export class MiPerfilComponent implements OnInit {
-  arrayMostrar:vistaPerfil[] = [];
+  arrayMostrar:Rutina[] = [];
   Usuario: usuarioFinal | any = {
     idusuario : "", 
     nombreusuario : "", 
@@ -29,6 +29,7 @@ export class MiPerfilComponent implements OnInit {
   constructor(private perfil:VistaPerfilService, private estado:ServicioLoginService, private router:Router) { }
 
   ngOnInit(): void {
+    //Se cargan los datos en caso de que el usuario tenga el token activo
     this.estado.loggedIn();
     if(this.datosCargados == false){
       this.perfil.cargarDatos(this.estado.idUsuario).subscribe((valor) =>{
@@ -46,12 +47,13 @@ export class MiPerfilComponent implements OnInit {
       })
     }
 
+    // Se obtienen las rutinas desde la promesa
     this.perfil.obtenerRutinas(this.estado.idUsuario).subscribe((valor) =>{
-      console.log(valor);
       this.arrayMostrar = valor;
     })
   }
 
+  //Metodo para cambiar la foto del usuario.
   cambiarFoto($event:any) {
     const [ file ] = $event.target.files;
     let extension = file.name.split(".").pop();
@@ -75,6 +77,7 @@ export class MiPerfilComponent implements OnInit {
     })
   }
 
+  //Se envia la foto al back para proceder a guardarla.
   enviarFoto(){
 
     const body = new FormData();
@@ -96,6 +99,8 @@ export class MiPerfilComponent implements OnInit {
     })
   }
   
+
+  //Se ciera la sesion del usuario
   cerrarSesion(){
     this.estado.logout();
     this.router.navigate(['']);
@@ -107,6 +112,7 @@ export class MiPerfilComponent implements OnInit {
     })
   }
 
+  //Pop up para obtener la informacion del usuario a editar.
   editarInformacion(){
     Swal.fire({
       title: "Informacion de usuario",

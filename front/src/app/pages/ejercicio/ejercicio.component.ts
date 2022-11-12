@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {EjerciciosPublicos} from "../../services/ejercicios-publicos.type";
+import {EjerciciosPublicosAux} from "../../services/ejercicios-publicos.type";
 import {EjerciciosPublicosService} from "../../services/ejercicios-publicos.service";
 import { ActivatedRoute } from '@angular/router';
 import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
@@ -13,34 +13,29 @@ import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
 
 export class EjercicioComponent implements OnInit {
   
-  ejerciciopublicoUnico: EjerciciosPublicos[] = [];
-  ejercicioEspecifico: EjerciciosPublicos = {
-    id:"",
-    tituloEjercicio:"",
-    tituloFoto:"",
-    foto:"",
-    descripcion:"",
-    descripcionMusculos: [],
-    video: ""
-  };
+  ejerciciopublicoUnico: EjerciciosPublicosAux[] = [];
+  ejercicioEspecifico! : EjerciciosPublicosAux | any;
 
   url: string = "";
   urlSafe: SafeResourceUrl = "";
+  datosCargados : boolean = false;
   constructor(private ejerciciospublicos:EjerciciosPublicosService, private _route:ActivatedRoute, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.ejerciciospublicos.devolverEjercicios().subscribe((valor) => {
       this.ejerciciopublicoUnico = valor;
+      console.log(this.ejerciciopublicoUnico);
       this.ejercicioEspecifico = this.obtenerObjeto(this.ejerciciopublicoUnico);
       this.url = this.ejercicioEspecifico.video;
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+      this.datosCargados = true;
     })
   }
   
-  obtenerObjeto(aux: EjerciciosPublicos[]){
+  obtenerObjeto(aux: EjerciciosPublicosAux[]){
     let auxObjeto;
     for(let i = 0; i < aux.length; i++){
-      if(aux[i].id == this._route.snapshot.paramMap.get('id')){
+      if(aux[i].idejercicio == this._route.snapshot.paramMap.get('id')){
         auxObjeto = aux[i];
       }
     }

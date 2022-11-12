@@ -13,12 +13,12 @@
     <div class="row cards" style="width: auto; margin: auto auto;">
       <div class="col-xl-4 col-md-6 col-lg-5 col-sm-12 mb-2" *ngFor="let ejercicio of ejerciciopublico.slice(0,3)">
         <div class="card card-height">
-          <img src="{{ejercicio.foto}}" class="card-img-top" title="{{ejercicio.tituloFoto}}">
+          <img src="{{ejercicio.foto}}" class="card-img-top" title="{{ejercicio.titulofoto}}">
           <div class="card-body">
-            <h4 class="card-text">{{ejercicio.tituloEjercicio}}</h4>
+            <h4 class="card-text">{{ejercicio.tituloejercicio}}</h4>
             <p class="card-text">{{ejercicio.descripcion}}</p>
             <div class="col text-center">
-              <a type='buttom' [routerLink] = "['/Ejercicio',ejercicio.id]" class="btn-fblanco btn btn-custom rounded-pill text-uppercase">Dirigir</a>
+              <a type='buttom' [routerLink] = "['/Ejercicio',ejercicio.idejercicio]" class="btn-fblanco btn btn-danger rounded-pill text-uppercase">Dirigir</a>
             </div>
           </div>
         </div>

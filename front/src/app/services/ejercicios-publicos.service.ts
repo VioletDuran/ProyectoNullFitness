@@ -11,15 +11,16 @@ import {Observable} from "rxjs";
 
 
 export class EjerciciosPublicosService {
-  url:string = '../../../assets/datos/ejercicios.json';
+  urlHttp:string = "http://localhost:3000/users";
   constructor(private httpClient:HttpClient) {
   }
   ngOnInit(): void {
   }
 
   devolverEjercicios(): Observable<any>{
-    return this.httpClient.get(this.url);
+    return this.httpClient.get(this.urlHttp + "/obtenerEjerciciosTotales/1");
   }
+
   retornarEjerciciosPrivados(arregloIds:String[], ejercicios:EjerciciosPublicos[]){
     let arrayEjerciciosAux:EjerciciosPublicos[] | any = [];
     for(let id in arregloIds){
