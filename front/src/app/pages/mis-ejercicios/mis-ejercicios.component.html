@@ -19,6 +19,9 @@
             <div class = "col-lg-4 col-md-6 col-sm-6 my-4" *ngFor="let aux of ejerciciosUsuario">
                 <h4 class = "fw-bolder">{{aux.tituloejercicio}}</h4>
                 <a [routerLink] = "['/Ejercicio',aux.idejercicio]"><img class = "tamaño-fotos rounded" src="{{aux.foto}}" alt="Foto Referencia Abdominal"></a>
+	            <div class = "row-fluid text-center">
+		            <button (click)="eliminarEjercicio(aux.idejercicio, rutinaActual.idrutinas)" class="btn mt-2 btn-danger rounded-pill text-uppercase fw-bolder text-custom">Eliminar Ejercicio</button>
+	            </div>
             </div>
         </div>
     </div>

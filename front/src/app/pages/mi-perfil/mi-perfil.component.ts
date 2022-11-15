@@ -421,7 +421,6 @@ export class MiPerfilComponent implements OnInit {
             objetivo: objetivoUsuario!,
             cantidad_ejercicio: cantidad!
           }
-          
           this.perfil.actualizarInformacionUsuario(datosUsuario).subscribe((valor) =>
             {
               if(valor == true){

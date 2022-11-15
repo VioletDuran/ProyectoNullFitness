@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const {revisarCorreo,registrarUsuario,loginUsuario,modificarDatos,devolverDatos,guardarFoto,upload,devolverRutinas, obtenerEjerciciosPrivados,obtenerEjerciciosTotales, devolverRutinasEspecifica} = require('../controllers/index.controller');
+const {revisarCorreo,registrarUsuario,loginUsuario,modificarDatos,devolverDatos,guardarFoto,upload,devolverRutinas, obtenerEjerciciosPrivados,obtenerEjerciciosTotales, devolverRutinasEspecifica,eliminarEjercicioDeRutina} = require('../controllers/index.controller');
 
 //Gets
 router.get('/users/:correo', revisarCorreo);
@@ -18,4 +18,6 @@ router.post('/users/guardarFoto',upload.single("myFile"),guardarFoto);
 //Puts
 router.put('/users/modificarDatos',modificarDatos);
 
+//Delete
+router.delete('/users/dataEliminarEjercicioRutina',eliminarEjercicioDeRutina);
 module.exports = router;

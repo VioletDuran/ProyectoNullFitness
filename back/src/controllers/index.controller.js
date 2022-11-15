@@ -5,7 +5,7 @@ const { json } = require('express');
 const pool = new Pool({
     host: 'localhost',
     user: 'postgres',
-    password: 'fugox123',
+    password: '!lolmafiaxD16',
     database: 'web',
     port: '5432'
 })
@@ -172,6 +172,19 @@ const obtenerEjerciciosTotales = async (req, res) =>{
     res.json(ejercicios.rows);
 }
 
+const eliminarEjercicioDeRutina = async(req,res) =>{
+    const{
+        idrutinas,
+        idejericio,
+    } = req.body;
+    const response = await pool.query('delete from rutinas_ejercicios where idejercicios = $1 and idrutinas = $2',[idejericio,idrutinas]);
+    pool.end;
+    if(response){
+        res.status(200).send(true);
+    }else{
+        res.status(500).send(false)
+    }
+}
 module.exports = {
     revisarCorreo,
     registrarUsuario,
@@ -183,5 +196,6 @@ module.exports = {
     devolverRutinas,
     obtenerEjerciciosPrivados,
     obtenerEjerciciosTotales,
-    devolverRutinasEspecifica
+    devolverRutinasEspecifica,
+    eliminarEjercicioDeRutina
 }

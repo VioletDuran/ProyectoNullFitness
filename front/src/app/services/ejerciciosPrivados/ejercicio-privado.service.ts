@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {RutinaEjericio} from "./ejercicio-privado.type";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,17 @@ export class EjercicioPrivadoService {
   devolverRutinasEspecifica(id:any): Observable<any>{
     let url = 'devolverRutinasEspecifica/' + id;
     return this.httpClient.get("http://localhost:3000/users/" + url);
+  }
+
+  eliminarEjercicioDeRutina(rutinaEjericioEliminar:any){
+    let idRutinaEjercicio: RutinaEjericio = rutinaEjericioEliminar;
+    let Options = {
+      headers: new HttpHeaders({
+        'Conten.type': 'application/json'
+      }),
+      body:idRutinaEjercicio
+    }
+    this.httpClient.delete(this.url+"/dataEliminarEjercicioRutina",Options).subscribe()
   }
 
 }

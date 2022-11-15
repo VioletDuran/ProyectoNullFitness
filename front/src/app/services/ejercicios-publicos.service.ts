@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EjerciciosPublicos } from "./ejercicios-publicos.type";
+import { EjerciciosPublicosAux } from "./ejercicios-publicos.type";
 //import ejercicios from '../../assets/datos/ejercicios.json';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -21,12 +21,5 @@ export class EjerciciosPublicosService {
     return this.httpClient.get(this.urlHttp + "/obtenerEjerciciosTotales/1");
   }
 
-  retornarEjerciciosPrivados(arregloIds:String[], ejercicios:EjerciciosPublicos[]){
-    let arrayEjerciciosAux:EjerciciosPublicos[] | any = [];
-    for(let id in arregloIds){
-      arrayEjerciciosAux.push(ejercicios.find(ejercicios => ejercicios.id === id));
-    }
-    return arrayEjerciciosAux;
-  }
 
 }

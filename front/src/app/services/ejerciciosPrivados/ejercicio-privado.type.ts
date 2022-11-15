@@ -5,3 +5,8 @@ export interface Rutina{
     descripcion:string;
     idusuario:string;
 }
+
+export interface RutinaEjericio{
+    idrutinas:string;
+    idejericio:string;
+}

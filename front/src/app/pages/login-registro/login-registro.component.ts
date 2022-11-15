@@ -11,6 +11,11 @@ import Swal from 'sweetalert2';
 })
 export class LoginRegistroComponent implements OnInit {
   formularioLogin!: FormGroup;
+  siteKey : string = "6LfGOQgjAAAAAI-NKUAP9D9oRACLJ1RKj7cF5Cw2";
+  buttonClicked: boolean = false;
+  captchaResolved: boolean = false;
+  correoLlenado: boolean = true;
+  passw: boolean = true;
   constructor(private formBuilder: FormBuilder, private router: Router, private login: ServicioLoginService) {
   }
 
@@ -33,13 +38,25 @@ export class LoginRegistroComponent implements OnInit {
       contraseña: ['', Validators.compose([
         Validators.pattern(/^.+$/),
         Validators.required
-      ])]
+      ])],
+      recaptcha: ['',Validators.required]
     }
     this.formularioLogin = this.formBuilder.group(formulario);
 
   }
+  checkCaptcha() {
+    this.captchaResolved = true;
+  }
   async iniciarSesion() {
     let datos = this.formularioLogin.value;
+    this.buttonClicked = true;
+    if(datos.correo == ''){
+      this.correoLlenado = false;
+    }
+    if(datos.contraseña == ''){
+      this.passw = false;
+    }
+
     if (this.formularioLogin.status === 'VALID') {
      await this.login.devolverLogin(datos.correo,datos.contraseña);
         if(this.login.isLoggedIn == true){
@@ -61,5 +78,11 @@ export class LoginRegistroComponent implements OnInit {
           })
         }
       }
+    }
+    correoLlenadoT(){
+      this.correoLlenado = true;
+    }
+    pass(){
+      this.passw = true;
     }
   }

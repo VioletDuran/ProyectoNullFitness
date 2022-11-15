@@ -4,7 +4,17 @@ $danger: #6D0101;
 $secondary: #FFFFFF;
 $font-family-sans-serif: 'Montserrat', sans-serif;
 
+body{
+  position: relative;
+  min-height: 100vh;
+}
 
+footer{
+  position: absolute;
+  bottom: 0;
+  height: 0;
+  width: 100%;
+}
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

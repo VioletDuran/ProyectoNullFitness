@@ -10,8 +10,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent implements OnInit {
-    
-    formularioRegistro!: FormGroup;
+  formularioRegistro!: FormGroup;
+  siteKey : string = "6LfGOQgjAAAAAI-NKUAP9D9oRACLJ1RKj7cF5Cw2";
+  buttonClicked: boolean = false;
+  captchaResolved: boolean = false;
+  nombreR:boolean = true;
+  nombreU:boolean = true;
+  edadU:boolean = true;
+  correoU:boolean = true;
+  passw:boolean = true;
   constructor(private formBuilder: FormBuilder, private router: Router, private servicio:RegistroServiceService) {
   }
 
@@ -34,12 +41,34 @@ export class RegistroComponent implements OnInit {
       contraseña: ['', Validators.compose([
           Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.,*]).{8,}$/),
           Validators.required
-      ])]
+      ])],
+
+      recaptcha: ['',Validators.required]
     }
     this.formularioRegistro = this.formBuilder.group(formulario);
   }
+  checkCaptcha() {
+      this.captchaResolved = true;
+  }
   registrarse(){
-    if (this.formularioRegistro.status === 'VALID') {
+      let validacion = this.formularioRegistro.value;
+      this.buttonClicked = true;
+      if(validacion.nombre == ''){
+          this.nombreR = false;
+      }
+      if(validacion.nombreUsuario == ''){
+          this.nombreU = false;
+      }
+      if(validacion.edad == ''){
+          this.edadU = false;
+      }
+      if(validacion.correo == ''){
+          this.correoU = false;
+      }
+      if(validacion.contraseña == ''){
+          this.passw = false;
+      }
+      if (this.formularioRegistro.status === 'VALID') {
       let datos = this.formularioRegistro.value;
       this.servicio.revisarCorreo(datos.correo).subscribe((value) =>{
         if(value == true){

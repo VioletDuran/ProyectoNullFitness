@@ -16,6 +16,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { RegistroComponent } from './pages/registro/registro.component';
 import { MisEjerciciosComponent } from './pages/mis-ejercicios/mis-ejercicios.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxCaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

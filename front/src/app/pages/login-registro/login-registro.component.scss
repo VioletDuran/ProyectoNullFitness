@@ -31,7 +31,17 @@
     border-radius: 50px;
     outline: none;
     display:block;
-  } 
+  }
+  #catpchaElemen{
+    transform: scale(0.75);
+    transform-origin: 0 0;
+    margin-top: 0;
+    margin-bottom: -4vh;
+    margin-right: -17vh;
+  }
+  .errorCualquieraA{
+    margin-top: -5vh;
+  }
 }
 
 @media (max-width: 576px) {
@@ -44,7 +54,7 @@
     border-radius: 50px;
     outline: none;
     display:block;
-  } 
+  }
 }
 
 .errorCualquiera{
@@ -54,12 +64,23 @@
   width: 300px;
 }
 
+.errorCualquieraA{
+  margin-top: 2vh;
+}
+
 @media (max-width: 624px) {
   .errorCualquiera{
     margin-top: -5px;
     color: red;
     font-size: 1.5vh;
     width: 180px;
+  }
+  #catpchaElemen{
+    transform: scale(0.60);
+    transform-origin: 0 0;
+    margin-top: 0;
+    margin-bottom: -1vh;
+    margin-right: -17vh;
   }
 }
 
@@ -69,4 +90,16 @@ input.ng-invalid.ng-touched{
 
 input.ng-valid.ng-touched{
   border: solid 1px green;
+}
+
+@media (max-width: 440px) {
+  #catpchaElemen{
+    transform: scale(0.50);
+    transform-origin: 0 0;
+    margin-top: 0;
+    margin-right: -17vh;
+  }
+  .errorCualquieraA{
+    margin-top: -5vh;
+  }
 }
