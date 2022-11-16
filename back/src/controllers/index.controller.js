@@ -17,10 +17,16 @@ const storage = multer.diskStorage({
       cb(null, `${fileName}`);
     },
     destination: function (res, file, cb) {
-      cb(null, `./public`);
+      const carpeta = res.query['carpeta'];
+      if(carpeta == undefined){
+        cb(null, './public');
+      }else{
+        cb(null, './public/' + carpeta);
+      }
+      
     },
   });
-  
+
 const upload = multer({ storage });
 
 const guardarFoto = async (req, res) => {
@@ -30,6 +36,15 @@ const guardarFoto = async (req, res) => {
   await pool.query('UPDATE usuarios SET foto = $1 where idusuario = $2', [file,id[0]]);
   pool.end;
   res.send(true);
+}
+
+const guardarFotoRutina = async (req,res) =>{
+    let file = req.file.filename;
+    let id = file.split("_");
+    file = "http://localhost:3000/rutinasPrivadas/" + file;
+    await pool.query('UPDATE rutinas SET foto = $1 where idrutinas = $2', [file,id[0]]);
+    pool.end;
+    res.send(true);
 }
 
 const revisarCorreo =  async (req, res) => {
@@ -53,7 +68,7 @@ const obtenerEjerciciosPrivados = async(req,res) =>{
 
 const devolverRutinas = async (req, res) =>{
     const id = req.params.id;
-    const response = await pool.query('select * from rutinas where idusuario = $1',[id]);
+    const response = await pool.query('select * from rutinas where idusuario = $1 ORDER BY idrutinas ASC',[id]);
     pool.end;
     let resultado = response.rows;
     return res.json(resultado);
@@ -197,6 +212,14 @@ const anadirEjercicio = async(req,res) =>{
     }
 }
 
+const editarInfoRutinaPriv = async(req,res) =>{
+    const {idrutinas, titulorutina, descripcion} = req.body;
+    response = await pool.query('UPDATE rutinas SET titulorutina = $1, descripcion = $2 where idrutinas = $3',[titulorutina,descripcion,idrutinas]);
+    if(response){
+        return res.status(200).send(true);
+    }
+}
+
 module.exports = {
     revisarCorreo,
     registrarUsuario,
@@ -210,5 +233,7 @@ module.exports = {
     obtenerEjerciciosTotales,
     devolverRutinasEspecifica,
     eliminarEjercicioDeRutina,
-    anadirEjercicio
+    anadirEjercicio,
+    editarInfoRutinaPriv,
+    guardarFotoRutina
 }

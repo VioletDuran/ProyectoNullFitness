@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { VistaPerfilService } from 'src/app/services/VistaPerfil/vista-perfil.service';
 import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
 import { datosModificables,usuarioFinal } from 'src/app/services/VistaPerfil/vista-perfil.type';
 import { Rutina } from 'src/app/services/ejerciciosPrivados/ejercicio-privado.type';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -26,6 +27,9 @@ export class MiPerfilComponent implements OnInit {
   };
   datosCargados: boolean = false;
   fileTemp:any;
+  @ViewChild('fotoRut') formularioRut!:NgForm
+  @ViewChild('fotoUsu') formularioUsu!:NgForm
+
   constructor(private perfil:VistaPerfilService, private estado:ServicioLoginService, private router:Router) { }
 
   ngOnInit(): void {
@@ -56,7 +60,7 @@ export class MiPerfilComponent implements OnInit {
   //Metodo para cambiar la foto del usuario.
   cambiarFoto($event:any) {
     const [ file ] = $event.target.files;
-    let extension = file.name.split(".").pop();
+    let extension = 'jpg';
     let nombreFinal = this.Usuario.idusuario + '.' + extension;
 
     this.fileTemp = {
@@ -71,10 +75,11 @@ export class MiPerfilComponent implements OnInit {
       confirmButtonColor: 'green',
       cancelButtonText: 'Cancelar',
       showCancelButton: true,
+      allowOutsideClick: false,
       preConfirm:() => {
         this.enviarFoto();
       }
-    })
+    }).then(() => this.formularioUsu.resetForm())
   }
 
   //Se envia la foto al back para proceder a guardarla.
@@ -82,7 +87,6 @@ export class MiPerfilComponent implements OnInit {
 
     const body = new FormData();
     body.append('myFile', this.fileTemp.fileRaw, this.fileTemp.fileName);
-    
     this.perfil.guardarFoto(body).subscribe((valor)=>{
       if(valor == true){
         Swal.fire({
@@ -442,4 +446,48 @@ export class MiPerfilComponent implements OnInit {
       }
     })
   }
+  cambiarFotoPriv($event: any,idrutinas:any) {
+    const [ file ] = $event.target.files; 
+    let extension = 'jpg';
+    let nombreFinal = idrutinas + '_rutinaPriv' + '.' + extension;
+    this.fileTemp = {
+      fileRaw:file,
+      fileName:nombreFinal,
+    }
+    Swal.fire({
+      title: 'Deseas confirmar el archivo?',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: 'green',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      preConfirm:() => {
+        this.enviarFotoRutina();
+      }
+    }).then(()=>
+     {
+      this.formularioRut.resetForm();
+     })
+  }
+
+  enviarFotoRutina() {
+    const body = new FormData();
+    body.append('myFile', this.fileTemp.fileRaw, this.fileTemp.fileName);
+    this.perfil.guardarFotoRutina(body).subscribe((valor)=>{
+      if(valor == true){
+        Swal.fire({
+          title: "Foto cambiada con exito!",
+          icon: "success",
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: 'green',
+          preConfirm:() => {
+            location.reload();
+          }
+        })
+      }
+      
+    })
+  }
+
 }

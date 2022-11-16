@@ -56,4 +56,41 @@ export class MisEjerciciosComponent implements OnInit {
       }
     })
   }
+
+  editarInformacion(){
+    Swal.fire({
+      title: "Informacion de usuario",
+      text: "Ingresa la informacion para editar.",
+      html: `
+      <form>
+      <input type="text" class="swal2-input" placeholder="Titulo rutina" id = "titulorutina">
+      <input type="text" class="swal2-input" placeholder="Descripcion rutina" id = "descripcion">
+      </form>
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      confirmButtonColor: 'green',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        const titulorutina = (<HTMLInputElement | null> Swal.getPopup()?.querySelector('#titulorutina'))?.value;
+        const descripcion =(<HTMLInputElement | null> Swal.getPopup()?.querySelector('#descripcion'))?.value;
+        if(titulorutina == ''){
+          Swal.showValidationMessage(`El titulo no puede estar vacio`);
+        }else{
+          this.ejerciciosPriv.editarInfoRutinaPriv({idrutinas: this._route.snapshot.paramMap.get('id'),titulorutina : titulorutina, descripcion : descripcion}).subscribe((valor) => {
+            if(valor == true){
+              Swal.fire({
+                title: 'Rutina modificada exitosamente!',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: 'green'
+              })
+              this.router.navigate(['/MiPerfil']);
+            }
+          })
+        }
+      }
+    })
+  }
+
 }

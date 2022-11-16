@@ -54,7 +54,8 @@ export class VistaEjerciciosComponent implements OnInit {
         })}
                   </select>
                 `,
-        confirmButtonText: 'Sign in',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: 'green',
         preConfirm: () => {
             const idrutinas = (<HTMLInputElement | null> Swal.getPopup()?.querySelector('#rutina'))?.value;
             this.servicioEjercicio.añadirEjercicioRutina({ idrutinas: idrutinas, idejercicios: String(idejercicios)}).subscribe((valor) =>{

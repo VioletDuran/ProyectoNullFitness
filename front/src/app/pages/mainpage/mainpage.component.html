@@ -13,7 +13,7 @@
     <div class="row cards" style="width: auto; margin: auto auto;">
       <div class="col-xl-4 col-md-6 col-lg-5 col-sm-12 mb-2" *ngFor="let ejercicio of ejerciciopublico.slice(0,3)">
         <div class="card card-height">
-          <img src="{{ejercicio.foto}}" class="card-img-top" title="{{ejercicio.titulofoto}}">
+          <img [src]="ejercicio.foto" class="card-img-top" [title]="ejercicio.titulofoto">
           <div class="card-body">
             <h4 class="card-text">{{ejercicio.tituloejercicio}}</h4>
             <p class="card-text">{{ejercicio.descripcion}}</p>

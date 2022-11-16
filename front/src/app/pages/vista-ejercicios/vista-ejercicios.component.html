@@ -8,7 +8,7 @@
 		</div>
 		<div class = "row">
 			<div class = "col">
-				<p class = "text-center fw-bolder">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius beatae dolore repellendus aliquam deserunt laudantium distinctio et minus accusantium quae, perferendis consequatur recusandae dolor rem accusamus? Quae tempora tempore est.</p>
+				<p class = "text-center fw-bolder">Ejercicios de indole publico.</p>
 			</div>
 		</div>
 		<hr class="mb-4 mt-0 d-inline-block mx-auto"
@@ -18,7 +18,7 @@
 		<div class = "row text-center">
 			<div class = "col-lg-4 col-md-6 col-sm-6 my-4" *ngFor="let aux of arrayEjercicios">
 				<h4 class = "fw-bolder">{{aux.tituloejercicio}}</h4>
-				<a [routerLink] = "['/Ejercicio',aux.idejercicio]"><img class = "tamaño-fotos rounded" src="{{aux.foto}}" alt="Foto Referencia Abdominal"></a>
+				<a [routerLink] = "['/Ejercicio',aux.idejercicio]"><img class = "tamaño-fotos rounded" [src]="aux.foto" alt="Foto Referencia Abdominal"></a>
 				<div class = "row-fluid text-center">
 					<button (click)="agregarEjercicios(aux.idejercicio)" class="btn mt-2 btn-danger rounded-pill text-uppercase fw-bolder text-custom">Agregar a rutina</button>
 				</div>

@@ -9,6 +9,9 @@
         <div class = "row">
             <div class = "col">
                 <p class = "text-center fw-bolder">{{rutinaActual.descripcion}}</p>
+                <div class = "text-center my-1">
+                    <button (click)="editarInformacion()" class="btn btn-danger rounded-pill text-uppercase fw-bolder text-custom">Configurar Informacion</button>
+                </div>
             </div>
         </div>
         <hr class="mb-4 mt-0 d-inline-block mx-auto"
@@ -18,7 +21,7 @@
         <div class = "row text-center">
             <div class = "col-lg-4 col-md-6 col-sm-6 my-4" *ngFor="let aux of ejerciciosUsuario">
                 <h4 class = "fw-bolder">{{aux.tituloejercicio}}</h4>
-                <a [routerLink] = "['/Ejercicio',aux.idejercicio]"><img class = "tamaño-fotos rounded" src="{{aux.foto}}" alt="Foto Referencia Abdominal"></a>
+                <a [routerLink] = "['/Ejercicio',aux.idejercicio]"><img class = "tamaño-fotos rounded" [src]="aux.foto" alt="Foto Referencia Abdominal"></a>
 	            <div class = "row-fluid text-center">
 		            <button (click)="eliminarEjercicio(aux.idejercicio, rutinaActual.idrutinas)" class="btn mt-2 btn-danger rounded-pill text-uppercase fw-bolder text-custom">Eliminar Ejercicio</button>
 	            </div>
