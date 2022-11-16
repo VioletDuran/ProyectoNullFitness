@@ -35,4 +35,8 @@ export class EjercicioPrivadoService {
     this.httpClient.delete(this.url+"/dataEliminarEjercicioRutina",Options).subscribe()
   }
 
+  añadirEjercicioRutina(ejercicioAñadir:any): Observable<any>{
+    return this.httpClient.post('http://localhost:3000/users/anadirEjercicio',ejercicioAñadir);
+  }
+
 }

@@ -17,12 +17,14 @@ export class VistaEjerciciosComponent implements OnInit {
   arrayEjercicios:EjerciciosPublicosAux[] = [];
   datosCargados:boolean = false;
   idUsuario:string = '';
+  tipoUsuario:string = '';
   rutinasUsuario:Rutina[]  = [];
   constructor(private servicioEjercicio:EjercicioPrivadoService, private servicioLogin:ServicioLoginService, private servicioPerfil:VistaPerfilService) {
   }
   ngOnInit(): void {
       this.servicioLogin.loggedIn();
       this.idUsuario = this.servicioLogin.idUsuario;
+      this.tipoUsuario = this.servicioLogin.tipoUsuario;
       forkJoin([
           this.servicioEjercicio.obtenerEjerciciosTotales(),
           this.servicioPerfil.obtenerRutinas(this.idUsuario)
@@ -34,20 +36,47 @@ export class VistaEjerciciosComponent implements OnInit {
         this.datosCargados = true;
       })
     }
-  agregarEjercicios(idejercicio:string) {
-    Swal.fire({
-      title: '¿Deseas agregar este ejercicio a tu rutina?',
-      html: `<select class="swal2-input" id="rutina" name="rutina" style="width: 17rem">
-                    ${this.rutinasUsuario.map((rutina) => {
-          return `<option value="${rutina.idrutinas}" class = "swal2-input">${rutina.titulorutina}</option>`
-      })}
-                </select>
-              `,
-      confirmButtonText: 'Sign in',
-      focusConfirm: false,
-      preConfirm: () => {
-          const idrutina = (<HTMLInputElement | null> Swal.getPopup()?.querySelector('#rutina'))?.value;
-      }
-    })
+  agregarEjercicios(idejercicios:string) {
+    if(this.servicioLogin.isLoggedIn == false){
+      Swal.fire({
+        title: 'Debes logearte para usar esta funcion!',
+        text: 'Porfavor inicia sesion',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: 'green'
+      })
+    }else{
+      Swal.fire({
+        title: '¿Cual rutina deseas agregar este ejercicio?',
+        html: `<select class="swal2-input" id="rutina" name="rutina" style="width: 17rem">
+                      ${this.rutinasUsuario.map((rutina) => {
+            return `<option value="${rutina.idrutinas}" class = "swal2-input">${rutina.titulorutina}</option>`
+        })}
+                  </select>
+                `,
+        confirmButtonText: 'Sign in',
+        preConfirm: () => {
+            const idrutinas = (<HTMLInputElement | null> Swal.getPopup()?.querySelector('#rutina'))?.value;
+            this.servicioEjercicio.añadirEjercicioRutina({ idrutinas: idrutinas, idejercicios: String(idejercicios)}).subscribe((valor) =>{
+              if(valor == false){
+                Swal.fire({
+                  title: 'Este ejercicio ya se encuentra en esta rutina',
+                  text: 'Porfavor elige otro ejercicio',
+                  icon: 'error',
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: 'green'
+                })
+              }else{
+                Swal.fire({
+                  title: 'Ejercicio incluido de forma correcta!',
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: 'green'
+                })
+              }
+            });
+        }
+      })
+    }
   }
 }

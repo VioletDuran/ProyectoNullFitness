@@ -5,7 +5,7 @@ const { json } = require('express');
 const pool = new Pool({
     host: 'localhost',
     user: 'postgres',
-    password: '!lolmafiaxD16',
+    password: 'fugox123',
     database: 'web',
     port: '5432'
 })
@@ -48,7 +48,6 @@ const obtenerEjerciciosPrivados = async(req,res) =>{
     const id = req.params.id;
     const response = await pool.query('select idejercicios from rutinas_ejercicios where idrutinas = $1',[id]);
     pool.end;
-    console.log(response.rows);
     return res.send(response.rows);
 }
 
@@ -119,7 +118,7 @@ const registrarUsuario = async (req, res) => {
 
 const loginUsuario = async (req,res) => {
     const {correo,contraseña} = req.body;
-    const response = await pool.query('select idusuario,contraseña from usuarios where correo = $1',[correo]);
+    const response = await pool.query('select idusuario,contraseña,tipousuario from usuarios where correo = $1',[correo]);
     const bcrypt = require('bcrypt');
     const jwt = require('jsonwebtoken');
     if(response.rows.length != 0 && bcrypt.compareSync(contraseña, response.rows[0].contraseña)){
@@ -185,6 +184,19 @@ const eliminarEjercicioDeRutina = async(req,res) =>{
         res.status(500).send(false)
     }
 }
+
+const anadirEjercicio = async(req,res) =>{
+    const {idrutinas,idejercicios} = req.body;
+    const response1 = await pool.query('select idejercicios from rutinas_ejercicios where idrutinas = $1 and idejercicios = $2',[idrutinas,idejercicios])
+    if(response1.rows.length == 1){
+        return res.status(200).send(false);
+    }
+    const response = await pool.query('INSERT INTO rutinas_ejercicios(idrutinas, idejercicios) VALUES ($1,$2)',[idrutinas,idejercicios]);
+    if(response){
+        return res.status(200).send(true);
+    }
+}
+
 module.exports = {
     revisarCorreo,
     registrarUsuario,
@@ -197,5 +209,6 @@ module.exports = {
     obtenerEjerciciosPrivados,
     obtenerEjerciciosTotales,
     devolverRutinasEspecifica,
-    eliminarEjercicioDeRutina
+    eliminarEjercicioDeRutina,
+    anadirEjercicio
 }

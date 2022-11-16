@@ -11,6 +11,7 @@ import { datosModificables } from '../VistaPerfil/vista-perfil.type';
 export class ServicioLoginService {
   url:string = "http://localhost:3000/users";
   idUsuario: string = "";
+  tipoUsuario: string = "";
   isLoggedIn:boolean = false;
   helper = new JwtHelperService();
   
@@ -18,6 +19,7 @@ export class ServicioLoginService {
 
   llenarToken(Token:any){
     this.idUsuario = Token.data.idusuario;
+    this.tipoUsuario = Token.data.tipousuario;
     this.isLoggedIn = true;
   }
 
