@@ -3,6 +3,7 @@ import {EjerciciosPublicosAux} from "../../services/ejercicios-publicos.type";
 import {EjerciciosPublicosService} from "../../services/ejercicios-publicos.service";
 import { ActivatedRoute } from '@angular/router';
 import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
+import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
 
 @Component({
   selector: 'app-ejercicio',
@@ -19,7 +20,7 @@ export class EjercicioComponent implements OnInit {
   url: string = "";
   urlSafe: SafeResourceUrl = "";
   datosCargados : boolean = false;
-  constructor(private ejerciciospublicos:EjerciciosPublicosService, private _route:ActivatedRoute, public sanitizer: DomSanitizer) { }
+  constructor(private ejerciciospublicos:EjerciciosPublicosService, private _route:ActivatedRoute, public sanitizer: DomSanitizer, private login:ServicioLoginService) { }
 
   ngOnInit(): void {
     this.ejerciciospublicos.devolverEjercicios().subscribe((valor) => {

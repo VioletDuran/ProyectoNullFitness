@@ -220,6 +220,14 @@ const editarInfoRutinaPriv = async(req,res) =>{
     }
 }
 
+const devolverCoincidencias = async(req,res) => {
+    let coincidencia = req.params.coincidencia;
+    coincidencia = coincidencia.toLowerCase();
+    let coincidendia = "%" + coincidencia + "%"
+    const response = await pool.query('select distinct ejercicios.tituloejercicio, ejercicios.idejercicio from ejercicios left join ejercicios_musculos on ejercicios_musculos.idejercicio = ejercicios.idejercicio left join musculos on ejercicios_musculos.idmusculo = musculos.idmusculo where LOWER(ejercicios.tituloejercicio) like $1 or LOWER(ejercicios.descripcion) like $1 or LOWER(musculos.musculo) like $1;',[coincidendia]);
+    return res.json(response.rows);
+}
+
 module.exports = {
     revisarCorreo,
     registrarUsuario,
@@ -235,5 +243,6 @@ module.exports = {
     eliminarEjercicioDeRutina,
     anadirEjercicio,
     editarInfoRutinaPriv,
-    guardarFotoRutina
+    guardarFotoRutina,
+    devolverCoincidencias
 }

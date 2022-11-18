@@ -17,6 +17,7 @@ import { MisEjerciciosComponent } from './pages/mis-ejercicios/mis-ejercicios.co
 import { HttpClientModule } from '@angular/common/http';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import {CommonModule} from '@angular/common';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {CommonModule} from '@angular/common';
     HttpClientModule,
     NgxCaptchaModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    AutocompleteLibModule
   ],
   providers: [],
   bootstrap: [AppComponent]

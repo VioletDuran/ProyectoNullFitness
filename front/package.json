@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@ngneat/error-tailor": "^1.4.3",
     "@popperjs/core": "^2.10.2",
+    "angular-ng-autocomplete": "^2.0.12",
     "bootstrap": "^5.2.0",
     "jsonwebtoken": "^8.5.1",
     "ngx-captcha": "^12.0.2",

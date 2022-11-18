@@ -4,6 +4,7 @@
     <div class="container-fluid">
       <!-- Logo que se muestra solo cuando es pantalla pequeña -->
         <a routerLink = "" class = "navbar-brand d-lg-none">
+          
           <img class = "img-responsive" src = "../assets/img/null.png" height = "50px">
         </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,13 +14,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent" type="button">
         <div class = "d-flex d-none d-lg-block ms-2">
           <!-- Formulario que se muestra en pantalla grandes -->
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button id="search-button" type="button" class="btn btn-danger">
-              <i class="fas fa-search"></i>
-            </button>
-          </form>
+            <input class="form-control me-2 dropdown-toggle" placeholder="Search" [formControl] = "control" #inputS>
+          <ul class="list-group position-absolute pos" [ngClass] = '{"d-none" : clicked}'  #list>
+            <div *ngIf = "this.ejercicios">
+              <li *ngFor = "let aux of ejercicios" class="list-group-item"><a (click) = "routear(aux.idejercicio)">{{aux.tituloejercicio}}</a></li>
+            </div>
+          </ul>
         </div>
+
+
         <!-- Logo Clicleable -->
         <a routerLink = "" class = "d-flex flex-grow-1 d-none d-lg-block text-center">
           <img class = "img-responsive" src = "../assets/img/null.png" height = "50px">
@@ -59,13 +62,16 @@
         <div>
         </div>
         <!-- Formulario para pantallas pequeñas -->
-        <form class="d-flex d-block d-lg-none" role="search">
-          <input class="form-control me-2 d-block d-lg-none" type="search" placeholder="Search" aria-label="Search">
-          <button id="search-button d-block d-lg-none" type="button" class="btn btn-danger">
-            <i class="fas fa-search d-block d-lg-none"></i>
-          </button>
-        </form>
+            <input class="d-flex d-block d-lg-none form-control" placeholder="Search" [formControl] = "control" #inputS2>
+          <ul class="list-group position-absolute pos" [ngClass] = '{"d-none" : clicked2}'  #list2>
+            <div *ngIf = "this.ejercicios">
+              <li *ngFor = "let aux of ejercicios" class="list-group-item"><a (click) = "routear(aux.idejercicio)">{{aux.tituloejercicio}}</a></li>
+            </div>
+          </ul>
       </div>
     </div>
   </nav>
+
+
+
 </header>
