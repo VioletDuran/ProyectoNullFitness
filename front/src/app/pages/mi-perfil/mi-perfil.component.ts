@@ -35,6 +35,16 @@ export class MiPerfilComponent implements OnInit {
   ngOnInit(): void {
     //Se cargan los datos en caso de que el usuario tenga el token activo
     this.estado.loggedIn();
+    if(!this.estado.isLoggedIn){
+      this.router.navigate(['']);
+      Swal.fire({
+        title: 'No estas logeado',
+        text: 'Porfavor inicia sesion para entrar a tu perfil.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: 'green'
+      })
+    }
     if(this.datosCargados == false){
       this.perfil.cargarDatos(this.estado.idUsuario).subscribe((valor) =>{
         this.Usuario = valor;

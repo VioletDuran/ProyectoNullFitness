@@ -4,7 +4,7 @@ import {EjerciciosPublicosService} from "../../services/ejercicios-publicos.serv
 import { ActivatedRoute } from '@angular/router';
 import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
 import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-ejercicio',
   templateUrl: './ejercicio.component.html',
@@ -20,9 +20,12 @@ export class EjercicioComponent implements OnInit {
   url: string = "";
   urlSafe: SafeResourceUrl = "";
   datosCargados : boolean = false;
-  constructor(private ejerciciospublicos:EjerciciosPublicosService, private _route:ActivatedRoute, public sanitizer: DomSanitizer, private login:ServicioLoginService) { }
+  constructor(private ejerciciospublicos:EjerciciosPublicosService, private _route:ActivatedRoute, public sanitizer: DomSanitizer, private login:ServicioLoginService, private router:Router) { }
 
   ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    }
     this.ejerciciospublicos.devolverEjercicios().subscribe((valor) => {
       this.ejerciciopublicoUnico = valor;
       console.log(this.ejerciciopublicoUnico);

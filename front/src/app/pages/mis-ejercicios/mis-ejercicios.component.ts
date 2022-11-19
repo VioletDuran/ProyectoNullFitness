@@ -6,6 +6,7 @@ import { EjerciciosPublicosAux } from '../../services/ejercicios-publicos.type';
 import { forkJoin } from 'rxjs';
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
+import { ServicioLoginService } from 'src/app/services/Login/servicio-login.service';
 
 @Component({
   selector: 'app-mis-ejercicios',
@@ -19,10 +20,21 @@ export class MisEjerciciosComponent implements OnInit {
   ejerciciosTotales : EjerciciosPublicosAux[] = [];
   rutinaActual?: Rutina | any ;
   datosCargados = false;
-  constructor(private _route:ActivatedRoute, private ejerciciosPriv:EjercicioPrivadoService, private router:Router) {
+  constructor(private _route:ActivatedRoute, private ejerciciosPriv:EjercicioPrivadoService, private router:Router, private estado:ServicioLoginService) {
   }
 
   ngOnInit(): void {
+    this.estado.loggedIn();
+    if(!this.estado.isLoggedIn){
+      this.router.navigate(['']);
+      Swal.fire({
+        title: 'No estas logeado',
+        text: 'Porfavor inicia sesion para entrar a tus rutinas.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: 'green'
+      })
+    }
     forkJoin(
       [this.ejerciciosPriv.devolverRutinasEspecifica(this._route.snapshot.paramMap.get('id')),
       this.ejerciciosPriv.obtenerEjerciciosTotales(),this.ejerciciosPriv.obtenerEjerciciosPrivados(this._route.snapshot.paramMap.get('id'))]
@@ -59,7 +71,7 @@ export class MisEjerciciosComponent implements OnInit {
 
   editarInformacion(){
     Swal.fire({
-      title: "Informacion de usuario",
+      title: "Informacion de rutina",
       text: "Ingresa la informacion para editar.",
       html: `
       <form>
