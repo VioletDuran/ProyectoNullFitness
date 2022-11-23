@@ -45,6 +45,7 @@
     </div>
     <div class = "row my-3">
         <div class = "text-center">
+            <button *ngIf="tipoUsuario == '2'" [routerLink] = "['/Administrador']" class="btn btn-danger rounded-pill text-uppercase fw-bolder text-custom mb-3">Administrador</button>
             <h3 class = "fw-bolder">Mis Rutinas</h3>
             <hr class="mb-4 mt-0 d-inline-block mx-auto"
             style="width: 12rem; color:#6D0101;"/>

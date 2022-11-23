@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import {CommonModule} from '@angular/common';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { AdministradorComponent } from './pages/administrador/administrador/administrador.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
     LoginRegistroComponent,
     RegistroComponent,
     MisEjerciciosComponent,
+    AdministradorComponent,
   ],
   imports: [
     BrowserModule,

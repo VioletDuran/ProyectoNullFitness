@@ -27,6 +27,7 @@ export class MiPerfilComponent implements OnInit {
   };
   datosCargados: boolean = false;
   fileTemp:any;
+  tipoUsuario: string = "";
   @ViewChild('fotoRut') formularioRut!:NgForm
   @ViewChild('fotoUsu') formularioUsu!:NgForm
 
@@ -57,6 +58,7 @@ export class MiPerfilComponent implements OnInit {
         if(this.Usuario.edad != null){
           this.Usuario.edad = this.Usuario.edad + " Años";
         }
+        this.tipoUsuario = this.estado.tipoUsuario;
         this.datosCargados = true;
       })
     }
