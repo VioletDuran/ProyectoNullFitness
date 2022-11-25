@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient,HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,36 @@ export class AdministradorService {
   
   cargarDatos(idusuario:string): Observable<any> {
     return this.httpClient.get(this.urlHttp+'/devolverDatos'+`/${idusuario}`)
+  }
+
+  devolverEjercicios(): Observable<any>{
+    return this.httpClient.get(this.urlHttp + "/obtenerEjerciciosTotales/1");
+  }
+
+  eliminarEjercicioPublico(idejercicio:any){
+    let Options = {
+      headers: new HttpHeaders({
+        'Conten.type': 'application/json'
+      }),
+      body:idejercicio
+    }
+    return this.httpClient.delete(this.urlHttp + "/EliminarEjercicioPublico",Options).subscribe();
+  }
+
+  obtenerMusculos(): Observable<any>{
+    return this.httpClient.get(this.urlHttp + "/obtenerMusculosTotales/1");
+  }
+
+  modificarEjerciciosPublicos(datos:any): Observable<any>{
+    return this.httpClient.put(this.urlHttp + "/modificarEjercicioPublico",datos);
+  }
+
+  guardarFotoEjercicio(datoImagen:any): Observable<any> {
+    return this.httpClient.post(this.urlHttp+'/guardarFotoEjercicio?carpeta=ejerciciosPublico',datoImagen);
+  }
+
+  guardarNuevoEjercicio(datos:any): Observable<any> {
+    return this.httpClient.post(this.urlHttp+'/guardarNuevoEjercicio',datos);
   }
 
 }

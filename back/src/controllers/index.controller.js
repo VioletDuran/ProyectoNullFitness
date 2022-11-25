@@ -47,6 +47,15 @@ const guardarFotoRutina = async (req,res) =>{
     res.send(true);
 }
 
+const guardarFotoEjercicio = async(req,res) =>{
+    let file = req.file.filename;
+    let id = file.split("_");
+    file = "http://localhost:3000/ejerciciosPublico/" + file;
+    await pool.query('UPDATE ejercicios SET foto = $1 where idejercicio = $2', [file,id[0]]);
+    pool.end;
+    res.send(true);
+}
+
 const revisarCorreo =  async (req, res) => {
     const correo = req.params.correo;
     const response = await pool.query('select correo from usuarios where correo = $1',[correo]);
@@ -172,7 +181,7 @@ const devolverDatos =  async (req, res) => {
 }
 
 const obtenerEjerciciosTotales = async (req, res) =>{
-    let ejercicios = await pool.query('select * from ejercicios');
+    let ejercicios = await pool.query('select * from ejercicios ORDER BY idejercicio ASC');
     for(i = 0; i < ejercicios.rows.length; i++){
         let idMusculos = await pool.query('select idmusculo from ejercicios_musculos where idejercicio = $1',[ejercicios.rows[i]["idejercicio"]]);
         let arregloMusculos = [];
@@ -228,6 +237,51 @@ const devolverCoincidencias = async(req,res) => {
     return res.json(response.rows);
 }
 
+const eliminarEjercicioPublico = async(req,res) =>{
+    let {idejercicio} = req.body;
+    const response = await pool.query('DELETE FROM ejercicios where idejercicio = $1',[idejercicio]);
+    if(response){
+        return res.status(200).send;
+    }
+}
+
+const obtenerMusculosTotales = async(req,res) =>{
+    let musculos = await pool.query('select * from musculos');
+    return res.status(200).send(musculos.rows);
+}
+
+const editarEjercicioPublico = async(req,res) =>{
+    let {idejercicio,tituloejercicio, descripcion, video, musculos} = req.body;
+     const response = await pool.query('delete from ejercicios_musculos where idejercicio = $1',[idejercicio]);
+     if(descripcion == "" && video == ""){
+        const response2 = await pool.query('UPDATE ejercicios SET tituloejercicio = $1, titulofoto = $1 where idejercicio = $2',[tituloejercicio,idejercicio]);
+     }
+     else if(video == "" || video.includes('youtube') == false){
+        const response2 = await pool.query('UPDATE ejercicios SET tituloejercicio = $1, titulofoto = $1, descripcion = $3 where idejercicio = $2',[tituloejercicio,idejercicio,descripcion]);
+     }else if(descripcion == ""){
+        const response2 = await pool.query('UPDATE ejercicios SET tituloejercicio = $1, titulofoto = $1, video = $3 where idejercicio = $2',[tituloejercicio,idejercicio,video]);
+     }else{
+        const response2 = await pool.query('UPDATE ejercicios SET tituloejercicio = $1, titulofoto = $1, descripcion = $3, video = $4 where idejercicio = $2',[tituloejercicio,idejercicio,descripcion,video]);
+     }
+     for(let i = 0; i < musculos.length; i++){
+        const response3 = await pool.query('INSERT INTO ejercicios_musculos(idejercicio,idmusculo) VALUES ($1,$2)',[idejercicio,musculos[i]]);
+     }
+     res.send(true);
+}
+
+const guardarNuevoEjercicio = async(req,res) =>{
+    let{tituloejercicio,descripcion,video,musculos} = req.body;
+    if(video == "" || video.includes('youtube') == false){
+        video = "https://www.youtube.com/embed/gc2iRcz9IPs"
+    }
+    const response = await pool.query('INSERT INTO ejercicios(tituloejercicio, titulofoto, descripcion, video,foto) VALUES($1,$1,$2,$3,$4) RETURNING idejercicio',[tituloejercicio,descripcion,video,""]);
+    let idejercicio = response.rows[0].idejercicio;
+    for(let i = 0; i < musculos.length; i++){
+        const response2 = await pool.query('INSERT INTO ejercicios_musculos(idejercicio,idmusculo) VALUES ($1,$2)',[idejercicio,musculos[i]]);
+     }
+     res.json(response.rows[0].idejercicio);
+}
+
 module.exports = {
     revisarCorreo,
     registrarUsuario,
@@ -244,5 +298,10 @@ module.exports = {
     anadirEjercicio,
     editarInfoRutinaPriv,
     guardarFotoRutina,
-    devolverCoincidencias
+    devolverCoincidencias,
+    eliminarEjercicioPublico,
+    obtenerMusculosTotales,
+    editarEjercicioPublico,
+    guardarFotoEjercicio,
+    guardarNuevoEjercicio
 }
