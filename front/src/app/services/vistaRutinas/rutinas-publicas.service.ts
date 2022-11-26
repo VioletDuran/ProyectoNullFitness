@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import {VistaRutinas} from './rutinas-publicas.type';
+import { HttpClient } from '@angular/common/http';
+import {Observable} from "rxjs";
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class RutinasPublicasService {
-  arregloRutinas:VistaRutinas[] = new Array(12);
-  constructor() {
-    this.generarNumeros()
+  urlHttp:string = "http://localhost:3000/users";
+  constructor(private httpCliente: HttpClient) {
   }
-  generarNumeros(){
-    for (let i = 0; i < 12; i++) {
-      this.arregloRutinas[i] = {tituloRutina:"Rutina " + (i+1)};
-    }
+  devolverRutinasPublicas(): Observable<any>{
+    return this.httpCliente.get(this.urlHttp + '/devolverRutinasPublicas/1');
   }
 }

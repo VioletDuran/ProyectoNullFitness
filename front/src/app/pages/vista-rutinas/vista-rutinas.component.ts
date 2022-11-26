@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {VistaRutinas} from '../../services/vistaRutinas/rutinas-publicas.type';
+import {Rutina} from '../../services/vistaRutinas/rutinas-publicas.type';
 import {RutinasPublicasService} from '../../services/vistaRutinas/rutinas-publicas.service';
 
 @Component({
@@ -8,12 +8,16 @@ import {RutinasPublicasService} from '../../services/vistaRutinas/rutinas-public
   styleUrls: ['./vista-rutinas.component.scss']
 })
 export class VistaRutinasComponent implements OnInit {
-
-  arrayRutinas:VistaRutinas[] = []
+  datosCargados: boolean = false;
+  arrayRutinas:Rutina[] = []
   constructor(private arrayRutinasAux:RutinasPublicasService) { 
   }
   ngOnInit(): void {
-    this.arrayRutinas = this.arrayRutinasAux.arregloRutinas;
+    this.arrayRutinasAux.devolverRutinasPublicas().subscribe((valor) =>{
+      this.arrayRutinas = valor;
+      console.log(this.arrayRutinas);
+      this.datosCargados = true;
+    })
   }
 
 }

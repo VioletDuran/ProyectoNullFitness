@@ -43,4 +43,30 @@ export class AdministradorService {
     return this.httpClient.post(this.urlHttp+'/guardarNuevoEjercicio',datos);
   }
 
+  guardarNuevaRutinaPub(datos:any): Observable<any> {
+    return this.httpClient.post(this.urlHttp+'/guardarNuevaRutinaPub',datos);
+  }
+
+  devolverRutinasPublicas(): Observable<any>{
+    return this.httpClient.get(this.urlHttp + '/devolverRutinasPublicas/1');
+  }
+
+  modificarRutinas(datos:any): Observable<any>{
+    return this.httpClient.put(this.urlHttp + '/modificarRutinas',datos);
+  }
+
+  guardarFotoRutina(datoImagen:any): Observable<any> {
+    return this.httpClient.post(this.urlHttp+'/guardarFotoRutinaPub?carpeta=rutinasPublicas',datoImagen);
+  }
+
+  eliminarRutinaPub(idrutinas:any){
+    let Options = {
+      headers: new HttpHeaders({
+        'Conten.type': 'application/json'
+      }),
+      body:idrutinas
+    }
+    return this.httpClient.delete(this.urlHttp + "/EliminarRutinasPub",Options).subscribe();
+  }
+
 }

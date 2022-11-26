@@ -1,4 +1,5 @@
 <app-header></app-header>
+<ng-container *ngIf = "datosCargados == true">
 <div class = "container py-5">
     <div class = "row">
         <div class = "col">
@@ -16,9 +17,10 @@
 <div class = "container-fluid">
     <div class = "row text-center">
         <div class = "col-lg-4 col-md-6 col-sm-6 my-4" *ngFor="let aux of arrayRutinas">
-            <h4 class = "fw-bolder">{{aux.tituloRutina}}</h4>
-            <img class = "tamaño-fotos rounded" src="../../../assets/img/rutina.jpg" alt="Foto Referencia Abdominal">
+            <h4 class = "fw-bolder">{{aux.titulorutina}}</h4>
+            <a [routerLink] = "['/EjerciciosRutinasPublicas',aux.idrutinas]"><img class = "tamaño-fotos rounded" src="{{aux.foto}}" alt="Foto Referencia Abdominal"></a>
         </div>
     </div>
 </div>
+</ng-container>
 <app-footer></app-footer>

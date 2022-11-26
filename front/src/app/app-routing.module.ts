@@ -9,6 +9,7 @@ import { LoginRegistroComponent } from './pages/login-registro/login-registro.co
 import { RegistroComponent } from './pages/registro/registro.component';
 import { MisEjerciciosComponent } from './pages/mis-ejercicios/mis-ejercicios.component';
 import { AdministradorComponent } from './pages/administrador/administrador/administrador.component';
+import { EjerciciosRutinasPublicosComponent } from './pages/ejerciciosRutinasPublicos/ejercicios-rutinas-publicos/ejercicios-rutinas-publicos.component';
 const routes: Routes = [
   {path:'Ejercicios',component:VistaEjerciciosComponent},
   {path:'Rutinas',component:VistaRutinasComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'Registro', component:RegistroComponent},
   {path:'MisEjercicios/:id', component:MisEjerciciosComponent},
   {path:'Administrador',component:AdministradorComponent},
+  {path:'EjerciciosRutinasPublicas/:id',component:EjerciciosRutinasPublicosComponent},
   {path:'',component:MainpageComponent},
   {path:'**',redirectTo:''}
 ];

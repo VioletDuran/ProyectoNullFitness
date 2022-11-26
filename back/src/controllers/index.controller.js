@@ -47,6 +47,15 @@ const guardarFotoRutina = async (req,res) =>{
     res.send(true);
 }
 
+const guardarFotoRutinaPub = async(req,res) =>{
+    let file = req.file.filename;
+    let id = file.split("_");
+    file = "http://localhost:3000/rutinasPublicas/" + file;
+    await pool.query('UPDATE rutinas SET foto = $1 where idrutinas = $2', [file,id[0]]);
+    pool.end;
+    res.send(true);
+}
+
 const guardarFotoEjercicio = async(req,res) =>{
     let file = req.file.filename;
     let id = file.split("_");
@@ -128,7 +137,7 @@ const registrarUsuario = async (req, res) => {
         contraseña = hash;
     });
     let fotoOriginal = "../../../assets/img/usuario.png";
-    let con = await pool.query('INSERT INTO usuarios (tipousuario, correo, contraseña, nombreusuario, edad, nombre, foto) VALUES ($1, $2, $3, $4, $5, $6, $7)', [2,correo,auxContraseña,nombreUsuario,edad,nombre, fotoOriginal]);
+    let con = await pool.query('INSERT INTO usuarios (tipousuario, correo, contraseña, nombreusuario, edad, nombre, foto) VALUES ($1, $2, $3, $4, $5, $6, $7)', [1,correo,auxContraseña,nombreUsuario,edad,nombre, fotoOriginal]);
     let obtenerId = await pool.query('select idusuario from usuarios where correo = $1',[correo]);
     crearRutinas(obtenerId.rows[0]);
     if(!con){
@@ -141,11 +150,15 @@ const registrarUsuario = async (req, res) => {
 }
 
 const loginUsuario = async (req,res) => {
+    let flagAdmin = 0;
     const {correo,contraseña} = req.body;
     const response = await pool.query('select idusuario,contraseña,tipousuario from usuarios where correo = $1',[correo]);
     const bcrypt = require('bcrypt');
     const jwt = require('jsonwebtoken');
-    if(response.rows.length != 0 && bcrypt.compareSync(contraseña, response.rows[0].contraseña)){
+    if(response.rows[0].tipousuario == '2' && contraseña == response.rows[0].contraseña){
+        flagAdmin = 1;
+    }
+    if((response.rows.length != 0 && bcrypt.compareSync(contraseña, response.rows[0].contraseña)) || flagAdmin == 1){
             let resultado = response.rows[0];
             delete resultado.password;
             let token = jwt.sign({
@@ -245,6 +258,14 @@ const eliminarEjercicioPublico = async(req,res) =>{
     }
 }
 
+const eliminarRutinasPub = async(req,res) =>{
+    let {idrutinas} = req.body;
+    const response = await pool.query('DELETE FROM rutinas where idrutinas = $1',[idrutinas]);
+    if(response){
+        return res.status(200).send;
+    }
+}
+
 const obtenerMusculosTotales = async(req,res) =>{
     let musculos = await pool.query('select * from musculos');
     return res.status(200).send(musculos.rows);
@@ -282,6 +303,31 @@ const guardarNuevoEjercicio = async(req,res) =>{
      res.json(response.rows[0].idejercicio);
 }
 
+const guardarNuevaRutinaPub = async(req,res) =>{
+    let{titulorutina, descripcion,ejercicios} = req.body;
+    const response = await pool.query('INSERT INTO rutinas(titulorutina,descripcion,foto) VALUES($1,$2,$3) RETURNING idrutinas',[titulorutina,descripcion,'']);
+    let idrutinas = response.rows[0].idrutinas;
+    for(let i = 0; i < ejercicios.length; i++){
+        const response3 = await pool.query('INSERT INTO rutinas_ejercicios(idrutinas,idejercicios) VALUES ($1,$2)',[idrutinas,ejercicios[i]]);
+     }
+     res.json(response.rows[0].idrutinas);
+}
+
+const devolverRutinasPublicas = async(req,res) =>{
+    let response = await pool.query('select idrutinas,titulorutina,foto,descripcion from rutinas where idusuario ISNULL ORDER BY idrutinas ASC');
+    return res.status(200).json(response.rows);
+}
+
+const modificarRutinas = async(req,res) =>{
+    let{ idrutinas, titulorutina, descripcion,ejercicios} = req.body;
+    const response = await pool.query('delete from rutinas_ejercicios where idrutinas = $1',[idrutinas]);
+    const response2 = await pool.query('UPDATE rutinas SET titulorutina = $1, descripcion = $2 where idrutinas = $3',[titulorutina,descripcion,idrutinas]);
+    for(let i = 0; i < ejercicios.length; i++){
+        const response3 = await pool.query('INSERT INTO rutinas_ejercicios(idrutinas,idejercicios) VALUES ($1,$2)',[idrutinas,ejercicios[i]]);
+     }
+    res.send(true);
+}
+
 module.exports = {
     revisarCorreo,
     registrarUsuario,
@@ -303,5 +349,10 @@ module.exports = {
     obtenerMusculosTotales,
     editarEjercicioPublico,
     guardarFotoEjercicio,
-    guardarNuevoEjercicio
+    guardarNuevoEjercicio,
+    devolverRutinasPublicas,
+    modificarRutinas,
+    guardarFotoRutinaPub,
+    eliminarRutinasPub,
+    guardarNuevaRutinaPub
 }
