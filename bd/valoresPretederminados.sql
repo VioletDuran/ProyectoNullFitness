@@ -154,7 +154,7 @@ INSERT INTO rutinas_ejercicios(idrutinas,idejercicios) VALUES ('6','23');
 
 
 --Administrador
-INSERT INTO usuarios(tipoUsuario,correo,contraseña,nombreUsuario,edad,nombre,foto) VALUES (2,'durandiego6@gmail.com','Pepitox123.','dieguitodelflow',21,'dieguitobienbonito','../../../assets/img/usuario.png');
+INSERT INTO usuarios(tipoUsuario,correo,contraseña,nombreUsuario,edad,nombre,foto) VALUES (2,'durandiego6@gmail.com','Pepitox123.','Diego',21,'Diego','../../../assets/img/usuario.png');
 INSERT INTO rutinas(titulorutina,foto,descripcion,idusuario) VALUES ('Mi Rutina 1','../../../assets/img/mirutina1.jpg','Rutina preestablecida',1);
 INSERT INTO rutinas(titulorutina,foto,descripcion,idusuario) VALUES ('Mi Rutina 2','../../../assets/img/mirutina1.jpg','Rutina preestablecida',1);
 INSERT INTO rutinas(titulorutina,foto,descripcion,idusuario) VALUES ('Mi Rutina 3','../../../assets/img/mirutina1.jpg','Rutina preestablecida',1);
