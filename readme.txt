@@ -1,3 +1,9 @@
+Integrantes: Diego Duran
+             Sergio Arriagada
+             Nicolas Salamanca
+
+
+
 Para la correcta ejecucion del programa en modo local, se pide hacer lo siguiente:
 
 Una vez descargado o clonado el repositorio, se necesita tener creado una base de datos en postgresql, luego de realizar la base de datos y cargar los datos que se encuentran en la carpeta BD, se
